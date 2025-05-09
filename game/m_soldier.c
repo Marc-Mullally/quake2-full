@@ -1229,6 +1229,78 @@ void SP_monster_soldier_x (edict_t *self)
 
 	self->monsterinfo.stand (self);
 
+	// pokemon stats
+	self->pokemonStats.classname = self->classname;
+	self->pokemonStats.experience = 0;
+	self->pokemonStats.statusEffect = NONE;
+
+	// change
+
+	self->pokemonStats.level = 3 + (rand() % 6);
+	self->pokemonStats.type[0] = FIRE;
+	self->pokemonStats.type[1] = MONOTYPE;
+
+	self->pokemonStats.baseStats[0] = 45;
+	self->pokemonStats.baseStats[1] = 75;
+	self->pokemonStats.baseStats[2] = 60;
+	self->pokemonStats.baseStats[3] = 70;
+	self->pokemonStats.baseStats[4] = 60;
+	self->pokemonStats.baseStats[5] = 90;
+		
+	self->pokemonStats.nickname = malloc(strlen(self->classname + 8)+1);
+	strcpy(self->pokemonStats.nickname, self->classname+8);
+
+
+	pokemonMove learnableMoves[] = {{.name = "Tackle",		.moveType = 1,   .power = 40, .priority = 0, .accuracy = 1.0f, .type = NORMAL,  .levelRequirement = 1, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+									{.name = "Growl",		.moveType =-1,   .power = 0,  .priority = 0, .accuracy = 1.0f, .type = NORMAL,  .levelRequirement = 3, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,-1,0,0,0,0,0,0},.statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Agility",		.moveType =-1,   .power = 0,  .priority = 0, .accuracy =-1.0f, .type = PSYCHIC, .levelRequirement = 5, .selfStateChange = {0,0,0,0,0,2,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Ember",		.moveType = 3,   .power = 40, .priority = 0, .accuracy = 1.0f, .type = FIRE,    .levelRequirement = 7, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance =  .1f, .statusEffect = BURNED,.stateChangeChance = 0.0f},
+									{.name = "Will-o-Wisp", .moveType = -1,  .power = 0,  .priority = 0, .accuracy = .85f, .type = FIRE,    .levelRequirement = 10,.selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 1.0f, .statusEffect = BURNED,.stateChangeChance = 0.0f} };
+
+	
+	memcpy(self->pokemonStats.learnableMoves, learnableMoves, sizeof(learnableMoves));
+
+	// change end
+
+	self->pokemonStats.nature[0] = 1 + (rand() % 5);
+	self->pokemonStats.nature[1] = 1 + (rand() % 5);
+
+	for (int i = 0; i < 6; i++) {
+		self->pokemonStats.EVStats[i] = 0;
+		self->pokemonStats.IVStats[i] = (rand() % 32);
+		calculateStat(&(self->pokemonStats), i);
+	}
+
+	self->pokemonStats.health = self->pokemonStats.stats[0];
+	self->max_health = self->pokemonStats.stats[0];
+	self->health = self->pokemonStats.stats[0];
+
+	int moveCount = 0;
+		
+	for (int i = (sizeof(self->pokemonStats.learnableMoves)/ sizeof(self->pokemonStats.learnableMoves[0]))-1; i >= 0; i--) {
+		if (self->pokemonStats.level >= self->pokemonStats.learnableMoves[i].levelRequirement && moveCount < 4 && self->pokemonStats.learnableMoves[i].name != NULL) {
+			self->pokemonStats.moveSet[moveCount] = self->pokemonStats.learnableMoves[i];
+			moveCount++;
+			if (moveCount == 4) break;
+		}
+	}
+
+	int start = 0, end = moveCount - 1;
+
+	// reverse the order of moves cus looks dumb the other way
+	int i = 0; 
+	int j = moveCount - 1;
+	while (i < j) {
+		pokemonMove temp = self->pokemonStats.moveSet[i];
+		self->pokemonStats.moveSet[i] = self->pokemonStats.moveSet[j];
+		self->pokemonStats.moveSet[j] = temp;
+		i++;
+		j--;
+	
+	}
+
+	// stats end
+
 	walkmonster_start (self);
 }
 

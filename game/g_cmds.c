@@ -900,6 +900,80 @@ void Cmd_PlayerList_f(edict_t *ent)
 }
 
 
+
+void Cmd_Select(edict_t* ent) {
+	if (ent->client->pers.battleState != BATTLE_PERFORM_ACTION) {
+		if (ent->inBattle) {
+
+			ent->client->pers.selected = ent->client->pers.selection;
+
+		}
+		else if (ent->client->pers.partySize != 0) {
+			ent->client->pers.catchMode = !ent->client->pers.catchMode;
+			if (ent->client->pers.catchMode) {
+				Com_Printf("Catch Mode\n");
+			}
+			else if (ent->client->pers.partySize != 0) {
+				Com_Printf("Battle Mode\n");
+			}
+		}
+		else {
+			Com_Printf("Catch a Pokemon to switch to Battle Mode\n");
+		}
+	}
+}
+
+
+void Cmd_SelectChange(edict_t* ent, char* direction) {
+	if (ent->inBattle && ent->client->pers.battleState != BATTLE_PERFORM_ACTION) {
+		int rows = 2;
+		int cols = 2;
+		if (ent->client->pers.menu == BAG || ent->client->pers.menu == POKEMON || ent->client->pers.menu == HEALING || ent->client->pers.menu == STATUS || ent->client->pers.menu == BATTLEITEMS || ent->client->pers.menu == REVIVES || ent->client->pers.menu == POKEBALLS || ent->client->pers.menu == ESCAPE) {
+			rows = 3;
+		}
+
+		int row = ent->client->pers.selection / cols;
+		int col = ent->client->pers.selection % cols;
+
+		if (strcmp(direction, "up") == 0) {
+			row = (row - 1 + rows) % rows; 
+		} else if (strcmp(direction, "down") == 0) {
+			row = (row + 1) % rows;
+		} else if (strcmp(direction, "left") == 0) {
+			col = (col - 1 + cols) % cols;
+		} else if (strcmp(direction, "right") == 0) {
+			col = (col + 1) % cols;
+		}
+
+		ent->client->pers.selection = row * cols + col;
+		UpdateBattleUI(ent, ent->client->pers.opponent);
+	} 
+}
+
+
+
+void Cmd_SelectBack(edict_t* ent) {
+	ent->client->pers.selection = 0;
+	if (ent->inBattle && ent->client->pers.battleState != BATTLE_PERFORM_ACTION) {
+		if (ent->client->pers.menu == HEALING ||
+			ent->client->pers.menu == STATUS  ||
+			ent->client->pers.menu == BATTLEITEMS ||
+			ent->client->pers.menu == REVIVES ||
+			ent->client->pers.menu == POKEBALLS ||
+			ent->client->pers.menu == ESCAPE) {
+
+			ent->client->pers.menu = BAG;
+		} else {
+
+		// add later when we got deeper into bag and items in it
+			ent->client->pers.menu = MAIN;
+
+		}
+		updateChoices(ent);
+		UpdateBattleUI(ent, ent->client->pers.opponent);
+	}
+}
+
 /*
 =================
 ClientCommand
@@ -987,6 +1061,21 @@ void ClientCommand (edict_t *ent)
 		Cmd_Wave_f (ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
+
+	// GRICKUS!!! cmds
+	else if (Q_stricmp(cmd, "select") == 0) 
+		Cmd_Select(ent);
+	else if (Q_stricmp(cmd, "selectUp") == 0)
+		Cmd_SelectChange(ent, "up");
+	else if (Q_stricmp(cmd, "selectDown") == 0)
+		Cmd_SelectChange(ent, "down");
+	else if (Q_stricmp(cmd, "selectLeft") == 0)
+		Cmd_SelectChange(ent, "left");
+	else if (Q_stricmp(cmd, "selectRight") == 0)
+		Cmd_SelectChange(ent, "right");
+	else if (Q_stricmp(cmd, "selectBack") == 0)
+		Cmd_SelectBack(ent);
+
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

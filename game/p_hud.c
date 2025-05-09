@@ -437,15 +437,17 @@ void G_SetStats (edict_t *ent)
 	//
 	// pickup message
 	//
+	/*
 	if (level.time > ent->client->pickup_msg_time)
 	{
 		ent->client->ps.stats[STAT_PICKUP_ICON] = 0;
 		ent->client->ps.stats[STAT_PICKUP_STRING] = 0;
 	}
-
+	*/
 	//
 	// timers
 	//
+	/*
 	if (ent->client->quad_framenum > level.framenum)
 	{
 		ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex ("p_quad");
@@ -471,7 +473,7 @@ void G_SetStats (edict_t *ent)
 		ent->client->ps.stats[STAT_TIMER_ICON] = 0;
 		ent->client->ps.stats[STAT_TIMER] = 0;
 	}
-
+	*/
 	//
 	// selected item
 	//
@@ -511,6 +513,7 @@ void G_SetStats (edict_t *ent)
 	//
 	// help icon / current weapon if not shown
 	//
+	/*
 	if (ent->client->pers.helpchanged && (level.framenum&8) )
 		ent->client->ps.stats[STAT_HELPICON] = gi.imageindex ("i_help");
 	else if ( (ent->client->pers.hand == CENTER_HANDED || ent->client->ps.fov > 91)
@@ -518,8 +521,8 @@ void G_SetStats (edict_t *ent)
 		ent->client->ps.stats[STAT_HELPICON] = gi.imageindex (ent->client->pers.weapon->icon);
 	else
 		ent->client->ps.stats[STAT_HELPICON] = 0;
-
-	ent->client->ps.stats[STAT_SPECTATOR] = 0;
+	*/
+	
 }
 
 /*
@@ -553,7 +556,7 @@ void G_SetSpectatorStats (edict_t *ent)
 	if (!cl->chase_target)
 		G_SetStats (ent);
 
-	cl->ps.stats[STAT_SPECTATOR] = 1;
+	
 
 	// layouts are independant in spectator
 	cl->ps.stats[STAT_LAYOUTS] = 0;
@@ -562,10 +565,6 @@ void G_SetSpectatorStats (edict_t *ent)
 	if (cl->showinventory && cl->pers.health > 0)
 		cl->ps.stats[STAT_LAYOUTS] |= 2;
 
-	if (cl->chase_target && cl->chase_target->inuse)
-		cl->ps.stats[STAT_CHASE] = CS_PLAYERSKINS + 
-			(cl->chase_target - g_edicts) - 1;
-	else
-		cl->ps.stats[STAT_CHASE] = 0;
+	
 }
 

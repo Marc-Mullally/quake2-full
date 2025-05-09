@@ -115,7 +115,7 @@ void SP_misc_blackhole (edict_t *self);
 void SP_misc_eastertank (edict_t *self);
 void SP_misc_easterchick (edict_t *self);
 void SP_misc_easterchick2 (edict_t *self);
-
+// GRICKUS!!! ALL MONSTERS
 void SP_monster_berserk (edict_t *self);
 void SP_monster_gladiator (edict_t *self);
 void SP_monster_gunner (edict_t *self);
@@ -275,7 +275,7 @@ ED_CallSpawn
 Finds the spawn function for the entity and calls it
 ===============
 */
-void ED_CallSpawn (edict_t *ent)
+void ED_CallSpawn (edict_t *ent) // GRICKUS!!! use this for spawning for battle maybe me thinks
 {
 	spawn_t	*s;
 	gitem_t	*item;
@@ -654,6 +654,131 @@ char *single_statusbar =
 "xv	50 "
 "pic 0 "
 
+// GRICKUS!!!  UI
+"if 18 "
+
+"	xl 25 yt 25"
+"	picn pokemonbox"
+"	xl 35 yt 35"
+"	stat_string 30 "
+"	yt 55"
+"	stat_string 28 "
+"	yt 35 xl 185"
+"	stat_string 9"
+
+"	xl 400 yt 235"
+"	picn pokemonbox"
+"	xl 410 yt 245"
+"	stat_string 29 "
+"	yt 265"
+"	stat_string 27 "
+"	yt 245 xl 560"
+"	stat_string 31 "
+
+"	yb	-100 "
+"	xv	325 "
+"	picn	blackbox "
+"	yb	-92 "
+"	xv	330 "
+"	stat_string 21 "
+
+"	yb	-100 "
+"	xv	400 "
+"	picn	blackbox "
+"	yb	-92 "
+"	xv	405 "
+"	stat_string 22 "
+
+"	yb	-75 "
+"	xv	325 "
+"	picn	blackbox "
+"	yb	-67 "
+"	xv	330 "
+"	stat_string 23 "
+
+"	yb	-75 "
+"	xv	400 "
+"	picn	blackbox "
+"	yb	-67 "
+"	xv	405 "
+"	stat_string 24 "
+
+"endif "
+
+"if 7 "
+"	yb	-100 "
+"	xv	325 "
+"	picn	blackboxselection "
+"	yb	-92 "
+"	xv	330 "
+"	stat_string 21 "
+"endif "
+
+"if 8 "
+"	yb	-100 "
+"	xv	400 "
+"	picn	blackboxselection "
+"	yb	-92 "
+"	xv	405 "
+"	stat_string 22 "
+"endif "
+
+"if 10 "
+"	yb	-75 "
+"	xv	325 "
+"	picn	blackboxselection "
+"	yb	-67 "
+"	xv	330 "
+"	stat_string 23 "
+"endif "
+
+"if 11 "
+"	yb	-75 "
+"	xv	400 "
+"	picn	blackboxselection "
+"	yb	-67 "
+"	xv	405 "
+"	stat_string 24 "
+"endif "
+
+"if 20 "
+"	yb	-50 "
+"	xv	325 "
+"	picn	blackbox "
+"	yb	-42 "
+"	xv	330 "
+"	stat_string 25 "
+
+"	yb	-50 "
+"	xv	400 "
+"	picn	blackbox "
+"	yb	-42 "
+"	xv	405 "
+"	stat_string 26 "
+"endif "
+
+"if 16 "
+"	yb	-50 "
+"	xv	325 "
+"	picn	blackboxselection "
+"	yb	-42 "
+"	xv	330 "
+"	stat_string 25 "
+"endif "
+
+"if 17 "
+"	yb	-50 "
+"	xv	400 "
+"	picn	blackboxselection "
+"	yb	-42 "
+"	xv	405 "
+"	stat_string 26 "
+"endif "
+
+"	yb -24"
+
+// end here
+
 // ammo
 "if 2 "
 "	xv	100 "
@@ -671,36 +796,13 @@ char *single_statusbar =
 "endif "
 
 // selected item
+
 "if 6 "
 "	xv	296 "
 "	pic 6 "
 "endif "
 
 "yb	-50 "
-
-// picked up item
-"if 7 "
-"	xv	0 "
-"	pic 7 "
-"	xv	26 "
-"	yb	-42 "
-"	stat_string 8 "
-"	yb	-50 "
-"endif "
-
-// timer
-"if 9 "
-"	xv	262 "
-"	num	2	10 "
-"	xv	296 "
-"	pic	9 "
-"endif "
-
-//  help / weapon icon 
-"if 11 "
-"	xv	148 "
-"	pic	11 "
-"endif "
 ;
 
 char *dm_statusbar =
@@ -737,6 +839,7 @@ char *dm_statusbar =
 "yb	-50 "
 
 // picked up item
+/*
 "if 7 "
 "	xv	0 "
 "	pic 7 "
@@ -747,6 +850,7 @@ char *dm_statusbar =
 "endif "
 
 // timer
+
 "if 9 "
 "	xv	246 "
 "	num	2	10 "
@@ -759,13 +863,14 @@ char *dm_statusbar =
 "	xv	148 "
 "	pic	11 "
 "endif "
-
+*/
 //  frags
 "xr	-50 "
 "yt 2 "
 "num 3 14 "
 
 // spectator
+/*
 "if 17 "
   "xv 0 "
   "yb -58 "
@@ -780,6 +885,7 @@ char *dm_statusbar =
   "xv 64 "
   "stat_string 16 "
 "endif "
+*/
 ;
 
 

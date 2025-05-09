@@ -1,0 +1,161 @@
+﻿  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_aclipa.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_draw16.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_drawa.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_edgea.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_polysa.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_scana.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_spr8.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_surf8.asm
+  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler Version 14.42.34436.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_varsa.asm
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_aclipa.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_draw16.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_drawa.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_edgea.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_polysa.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_scana.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_spr8.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_surf8.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): warning MSB8065: Custom build for item "r_varsa.asm" succeeded, but specified output "c:\users\marcm\onedrive\documents\github\quake2-full\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+  q_shared.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(266,40): warning C4100: 'f': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(312,7): warning C4459: declaration of 'i' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(305,7):
+      see declaration of 'i'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(315,9): warning C4459: declaration of 'corners' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(306,9):
+      see declaration of 'corners'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(418,86): warning C4100: 'p': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(418,62): warning C4100: 'emaxs': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(418,48): warning C4100: 'emins': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(658,7): warning C4459: declaration of 'i' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(305,7):
+      see declaration of 'i'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(764,7): warning C4459: declaration of 'i' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(305,7):
+      see declaration of 'i'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(841,7): warning C4459: declaration of 'i' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(305,7):
+      see declaration of 'i'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(876,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(897,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(923,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(1056,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(1163,7): warning C4459: declaration of 'i' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(305,7):
+      see declaration of 'i'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(1230,8): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(1234,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c(1334,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  q_shwin.c
+  r_aclip.c
+  r_alias.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(108,16): warning C4189: 'minz': local variable is initialized but not referenced
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(1005,36): warning C4100: 'pmdl': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(1052,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(1053,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(1054,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(1055,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(1056,14): warning C4210: nonstandard extension used: function given file scope
+  r_bsp.c
+  r_draw.c
+  r_edge.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_edge.c(801,35): warning C4459: declaration of 'pface' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_edge.c(741,14):
+      see declaration of 'pface'
+  
+  r_image.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_image.c(422,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_image.c(463,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  r_light.c
+  r_main.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_main.c(1097,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_main.c(1095,26): warning C4100: 'camera_separation': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_main.c(1303,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_main.c(1404,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_main.c(1416,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  r_misc.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(53,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(55,14): warning C4210: nonstandard extension used: function given file scope
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(226,62): warning C4100: 'vout': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(226,50): warning C4100: 'vin': unreferenced formal parameter
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(601,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(635,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_misc.c(642,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  r_model.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_model.c(131,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  r_part.c
+  r_poly.c
+  r_polyse.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_polyse.c(415,34): warning C4459: declaration of 'skinwidth' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_polyse.c(114,6):
+      see declaration of 'skinwidth'
+  
+  r_rast.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_rast.c(600,56): warning C4389: '==': signed/unsigned mismatch
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_rast.c(644,56): warning C4389: '==': signed/unsigned mismatch
+  r_scan.c
+  r_sprite.c
+  r_surf.c
+  rw_ddraw.c
+  Generating Code...
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_image.c(328,1): warning C4701: potentially uninitialized local variable 'blue' used
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_image.c(327,1): warning C4701: potentially uninitialized local variable 'green' used
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_image.c(326,1): warning C4701: potentially uninitialized local variable 'red' used
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_image.c(329,1): warning C4701: potentially uninitialized local variable 'alphabyte' used
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_alias.c(434,1): warning C4740: flow in or out of inline asm code suppresses global optimization
+  Compiling...
+  rw_dib.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\rw_dib.c(257,7): warning C4456: declaration of 'i' hides previous local declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\rw_dib.c(220,9):
+      see declaration of 'i'
+  
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\rw_dib.c(366,52): warning C4057: 'function': 'const COLORREF *' differs in indirection to slightly different base types from 'int [19]'
+  rw_imp.c
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\rw_imp.c(49,34): warning C4459: declaration of 'vid_fullscreen' hides global declaration
+      C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_soft\r_local.h(575,16):
+      see declaration of 'vid_fullscreen'
+  
+  Generating Code...
+LINK : fatal error LNK1181: cannot open input file '.\..\release\\.obj'

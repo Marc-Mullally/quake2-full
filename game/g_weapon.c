@@ -409,7 +409,14 @@ static void Grenade_Explode (edict_t *ent)
 		float	points;
 		vec3_t	v;
 		vec3_t	dir;
-
+		
+		
+		if (ent->owner->client->pers.catchMode) { // GRICKUS!!!
+			CatchAttempt(ent->owner, ent->enemy); // Attempt to catch
+		} else {
+			StartBattle(ent->owner, ent->enemy); // Start the battle
+		}
+		
 		VectorAdd (ent->enemy->mins, ent->enemy->maxs, v);
 		VectorMA (ent->enemy->s.origin, 0.5, v, v);
 		VectorSubtract (ent->s.origin, v, v);
@@ -419,7 +426,7 @@ static void Grenade_Explode (edict_t *ent)
 			mod = MOD_HANDGRENADE;
 		else
 			mod = MOD_GRENADE;
-		T_Damage (ent->enemy, ent, ent->owner, dir, ent->s.origin, vec3_origin, (int)points, (int)points, DAMAGE_RADIUS, mod);
+		//T_Damage (ent->enemy, ent, ent->owner, dir, ent->s.origin, vec3_origin, (int)points, (int)points, DAMAGE_RADIUS, mod);
 	}
 
 	if (ent->spawnflags & 2)
@@ -428,10 +435,13 @@ static void Grenade_Explode (edict_t *ent)
 		mod = MOD_HG_SPLASH;
 	else
 		mod = MOD_G_SPLASH;
-	T_RadiusDamage(ent, ent->owner, ent->dmg, ent->enemy, ent->dmg_radius, mod);
+	//T_RadiusDamage(ent, ent->owner, ent->dmg, ent->enemy, ent->dmg_radius, mod);
 
 	VectorMA (ent->s.origin, -0.02, ent->velocity, origin);
+	// EXPLOSION EFFECTS
+	/*
 	gi.WriteByte (svc_temp_entity);
+	
 	if (ent->waterlevel)
 	{
 		if (ent->groundentity)
@@ -446,9 +456,10 @@ static void Grenade_Explode (edict_t *ent)
 		else
 			gi.WriteByte (TE_ROCKET_EXPLOSION);
 	}
+	
 	gi.WritePosition (origin);
 	gi.multicast (ent->s.origin, MULTICAST_PHS);
-
+	*/
 	G_FreeEdict (ent);
 }
 
@@ -551,10 +562,10 @@ void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int 
 		grenade->spawnflags = 1;
 	grenade->s.sound = gi.soundindex("weapons/hgrenc1b.wav");
 
-	if (timer <= 0.0)
-		Grenade_Explode (grenade);
-	else
-	{
+	if (timer <= 0.0) {
+		// Grenade_Explode (grenade);
+		
+	} else {
 		gi.sound (self, CHAN_WEAPON, gi.soundindex ("weapons/hgrent1a.wav"), 1, ATTN_NORM, 0);
 		gi.linkentity (grenade);
 	}

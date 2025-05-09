@@ -625,8 +625,10 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.max_grenades	= 50;
 	client->pers.max_cells		= 200;
 	client->pers.max_slugs		= 50;
-
+	client->pers.catchMode = true;
 	client->pers.connected = true;
+
+	client->pers.inventory[ITEM_INDEX(FindItem("grenades"))] = 5;
 }
 
 
@@ -1741,8 +1743,172 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		if (other->inuse && other->client->chase_target == ent)
 			UpdateChaseCam(other);
 	}
+
+	if (ent->inBattle) {
+		BattleThink(ent);
+	}
 }
 
+void BattleThink(edict_t *ent) {
+	int opponentMoveCount = 0;
+	int modPriority = 0;
+	ent->client->pers.playerFirst = true;
+	float displayDelay = 1.25f;
+	switch (ent->client->pers.battleState) {
+
+	case (BATTLE_PERFORM_ACTION):
+
+		if (level.time < ent->client->pers.battleDelay) { return; }
+
+
+		if (ent->client->pers.opponent->moveSelected == -1) {
+			for (int i = 0; i < 4; i++) {
+				if (ent->client->pers.opponent->pokemonStats.moveSet[i].name != NULL) {
+					opponentMoveCount++;
+				}
+			}
+			ent->client->pers.opponent->moveSelected = rand() % opponentMoveCount;
+		}
+
+		if (!ent->client->pers.pokemon->alreadyMoved && !ent->client->pers.opponent->alreadyMoved) {
+			switch (ent->client->pers.menu) {
+
+			case MAIN:				 if (RunAttempt(ent)) { return; } ent->client->pers.battleDelay = level.time + displayDelay; return;
+
+			case FIGHT: // order only matters on this. rest of them opponent goes last.
+
+				if (ent->client->pers.pokemon->pokemonStats.moveSet[ent->client->pers.selected].priority == ent->client->pers.opponent->pokemonStats.moveSet[ent->client->pers.opponent->moveSelected].priority) {
+
+					if (ent->client->pers.pokemon->pokemonStats.stats[5] != ent->client->pers.opponent->pokemonStats.stats[5]) {
+						ent->client->pers.playerFirst = (ent->client->pers.pokemon->pokemonStats.stats[5] > ent->client->pers.opponent->pokemonStats.stats[5]);
+					}
+					else {
+						ent->client->pers.playerFirst = (rollNumber() >= .5f);
+					}
+				}
+
+				if (ent->client->pers.playerFirst) {
+					doMove(ent, ent->client->pers.pokemon, ent->client->pers.opponent, ent->client->pers.selected);
+					ent->client->pers.battleDelay = level.time + displayDelay;
+					return;
+				}
+				else {
+					doMove(ent, ent->client->pers.opponent, ent->client->pers.pokemon, ent->client->pers.opponent->moveSelected);
+					//doMove(ent, ent->client->pers.pokemon, ent->client->pers.opponent, ent->client->pers.selected);
+					ent->client->pers.battleDelay = level.time + displayDelay;
+					return;
+
+				}
+
+				break;
+
+			case POKEMON:				break;
+			case HEALING:				break;
+			case STATUS:				break;
+			case BATTLEITEMS:			break;
+			case REVIVES:				break;
+			case POKEBALLS:				break;
+			case ESCAPE:				break;
+
+			}
+		} 
+
+			if (!ent->client->pers.opponent->alreadyMoved) {
+				if (ent->client->pers.menu != FIGHT || !ent->client->pers.playerFirst) {
+					doMove(ent, ent->client->pers.opponent, ent->client->pers.pokemon, ent->client->pers.opponent->moveSelected);
+					ent->client->pers.battleDelay = level.time + displayDelay;
+					return;
+				}
+			} else if (!ent->client->pers.pokemon->alreadyMoved) {
+				doMove(ent, ent->client->pers.pokemon, ent->client->pers.opponent, ent->client->pers.selected);
+				ent->client->pers.battleDelay = level.time + displayDelay;
+				return;
+			}
+
+			if (ent->client->pers.pokemon->alreadyMoved && ent->client->pers.opponent->alreadyMoved) {
+				ent->client->pers.battleState = BATTLE_WAIT_ACTION;
+				ent->client->pers.menu = MAIN;
+				ent->client->pers.selected = -1;
+				ent->client->pers.selection = 0;
+				ent->client->pers.opponent->moveSelected = -1;
+				ent->client->pers.opponent->alreadyMoved = false;
+				ent->client->pers.pokemon->alreadyMoved = false;
+				updateChoices(ent);
+				UpdateBattleUI(ent, ent->client->pers.opponent);
+				return;
+			}
+			
+
+		case (BATTLE_WAIT_ACTION):
+
+			if (ent->client->pers.selected != -1) {
+				switch (ent->client->pers.menu) {
+				case MAIN:
+					switch (ent->client->pers.selected) {
+						case 0: ent->client->pers.menu = FIGHT; break;
+						case 1: ent->client->pers.menu = BAG; break;
+						case 2: ent->client->pers.menu = POKEMON; break;
+						case 3: ent->client->pers.battleState = BATTLE_PERFORM_ACTION; return;
+					}
+					break;
+
+
+				case FIGHT:
+
+					if (ent->client->pers.pokemon->pokemonStats.moveSet[ent->client->pers.selected].name != NULL) {
+						ent->client->pers.battleState = BATTLE_PERFORM_ACTION;
+						return;
+					} /* else {
+						ent->client->pers.selected = -1;
+						return;
+					}
+					*/
+					break;
+
+				case BAG:
+					switch (ent->client->pers.selected) {
+						case 0: ent->client->pers.menu = HEALING; break;
+						case 1: ent->client->pers.menu = STATUS; break;
+						case 2: ent->client->pers.menu = BATTLEITEMS; break;
+						case 3: ent->client->pers.menu = REVIVES; break;
+						case 4: ent->client->pers.menu = POKEBALLS; break;
+						case 5: ent->client->pers.menu = ESCAPE; break;
+					}
+
+					break;
+
+				case POKEMON:
+
+					if (ent->client->pers.party[ent->client->pers.selected].classname != NULL && ent->client->pers.pokemonIndex != ent->client->pers.selected) {
+						if (ent->client->pers.party[ent->client->pers.selected].health > 0) {
+							retrievePokemon(ent);
+							sendOut(ent, ent->client->pers.opponent, ent->client->pers.selected);
+							ent->client->pers.menu = MAIN;
+						}
+						else {
+							Com_Printf("$s is unable to battle.", ent->client->pers.party[ent->client->pers.selected].nickname);
+						}
+					} else {
+						ent->client->pers.selected = -1;
+						return;
+					}
+					break;
+
+				}
+
+				ent->client->pers.selected = -1;
+				ent->client->pers.selection = 0;
+				updateChoices(ent);
+				UpdateBattleUI(ent, ent->client->pers.opponent);
+			}
+
+			return;
+
+		case (BATTLE_IDLE):
+
+			return;
+	}
+}
 
 /*
 ==============

@@ -1,0 +1,13 @@
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_draw.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_draw.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_image.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_image.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_light.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_light.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_mesh.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_mesh.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_model.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_model.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_rmain.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_rmain.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_rmisc.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_rmisc.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_rsurf.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_rsurf.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\gl_warp.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\gl_warp.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\glw_imp.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\glw_imp.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\game\q_shared.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\q_shared.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\q_shwin.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\q_shwin.obj
+C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\win32\qgl_win.c;C:\Users\marcm\OneDrive\Documents\GitHub\quake2-full\ref_gl\release\qgl_win.obj

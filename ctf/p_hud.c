@@ -464,6 +464,7 @@ void G_SetStats (edict_t *ent)
 	//
 	// timers
 	//
+	/*
 	if (ent->client->quad_framenum > level.framenum)
 	{
 		ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex ("p_quad");
@@ -489,7 +490,7 @@ void G_SetStats (edict_t *ent)
 		ent->client->ps.stats[STAT_TIMER_ICON] = 0;
 		ent->client->ps.stats[STAT_TIMER] = 0;
 	}
-
+	*/
 	//
 	// selected item
 	//

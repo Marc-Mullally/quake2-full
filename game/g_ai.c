@@ -103,38 +103,39 @@ Used for standing around and looking for players
 Distance is for slight position adjustments needed by the animations
 ==============
 */
-void ai_stand (edict_t *self, float dist)
+void ai_stand(edict_t* self, float dist)
 {
 	vec3_t	v;
 
-	if (dist)
-		M_walkmove (self, self->s.angles[YAW], dist);
+	if (false) { // GRICKUS!!!
+		if (dist)
+			M_walkmove(self, self->s.angles[YAW], dist);
 
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 	{
 		if (self->enemy)
 		{
-			VectorSubtract (self->enemy->s.origin, self->s.origin, v);
+			VectorSubtract(self->enemy->s.origin, self->s.origin, v);
 			self->ideal_yaw = vectoyaw(v);
 			if (self->s.angles[YAW] != self->ideal_yaw && self->monsterinfo.aiflags & AI_TEMP_STAND_GROUND)
 			{
 				self->monsterinfo.aiflags &= ~(AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
-				self->monsterinfo.run (self);
+				self->monsterinfo.run(self);
 			}
-			M_ChangeYaw (self);
-			ai_checkattack (self, 0);
+			M_ChangeYaw(self);
+			ai_checkattack(self, 0);
 		}
 		else
-			FindTarget (self);
+			FindTarget(self);
 		return;
 	}
 
-	if (FindTarget (self))
+	if (FindTarget(self))
 		return;
-	
+
 	if (level.time > self->monsterinfo.pausetime)
 	{
-		self->monsterinfo.walk (self);
+		self->monsterinfo.walk(self);
 		return;
 	}
 
@@ -142,13 +143,14 @@ void ai_stand (edict_t *self, float dist)
 	{
 		if (self->monsterinfo.idle_time)
 		{
-			self->monsterinfo.idle (self);
+			self->monsterinfo.idle(self);
 			self->monsterinfo.idle_time = level.time + 15 + random() * 15;
 		}
 		else
 		{
 			self->monsterinfo.idle_time = level.time + random() * 15;
 		}
+	}
 	}
 }
 
@@ -162,23 +164,28 @@ The monster is walking it's beat
 */
 void ai_walk (edict_t *self, float dist)
 {
-	M_MoveToGoal (self, dist);
+	if (false) { //GRICKUS!!!
+		M_MoveToGoal(self, dist);
 
-	// check for noticing a player
-	if (FindTarget (self))
-		return;
+		// check for noticing a player
+		if (FindTarget(self))
+			return;
 
-	if ((self->monsterinfo.search) && (level.time > self->monsterinfo.idle_time))
-	{
-		if (self->monsterinfo.idle_time)
+		if ((self->monsterinfo.search) && (level.time > self->monsterinfo.idle_time))
 		{
-			self->monsterinfo.search (self);
-			self->monsterinfo.idle_time = level.time + 15 + random() * 15;
+			if (self->monsterinfo.idle_time)
+			{
+				self->monsterinfo.search(self);
+				self->monsterinfo.idle_time = level.time + 15 + random() * 15;
+			}
+			else
+			{
+				self->monsterinfo.idle_time = level.time + random() * 15;
+			}
 		}
-		else
-		{
-			self->monsterinfo.idle_time = level.time + random() * 15;
-		}
+	}
+	else {
+		self->monsterinfo.stand(self);
 	}
 }
 
@@ -923,195 +930,198 @@ void ai_run (edict_t *self, float dist)
 	vec3_t		v_forward, v_right;
 	float		left, center, right;
 	vec3_t		left_target, right_target;
-
-	// if we're going to a combat point, just proceed
-	if (self->monsterinfo.aiflags & AI_COMBAT_POINT)
-	{
-		M_MoveToGoal (self, dist);
-		return;
-	}
-
-	if (self->monsterinfo.aiflags & AI_SOUND_TARGET)
-	{
-		VectorSubtract (self->s.origin, self->enemy->s.origin, v);
-		if (VectorLength(v) < 64)
+	if (false) { // switch to inBattle (GRICKUS!!!)
+		// if we're going to a combat point, just proceed
+		if (self->monsterinfo.aiflags & AI_COMBAT_POINT)
 		{
-			self->monsterinfo.aiflags |= (AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
-			self->monsterinfo.stand (self);
+			M_MoveToGoal(self, dist);
 			return;
 		}
 
-		M_MoveToGoal (self, dist);
-
-		if (!FindTarget (self))
-			return;
-	}
-
-	if (ai_checkattack (self, dist))
-		return;
-
-	if (self->monsterinfo.attack_state == AS_SLIDING)
-	{
-		ai_run_slide (self, dist);
-		return;
-	}
-
-	if (enemy_vis)
-	{
-//		if (self.aiflags & AI_LOST_SIGHT)
-//			dprint("regained sight\n");
-		M_MoveToGoal (self, dist);
-		self->monsterinfo.aiflags &= ~AI_LOST_SIGHT;
-		VectorCopy (self->enemy->s.origin, self->monsterinfo.last_sighting);
-		self->monsterinfo.trail_time = level.time;
-		return;
-	}
-
-	// coop will change to another enemy if visible
-	if (coop->value)
-	{	// FIXME: insane guys get mad with this, which causes crashes!
-		if (FindTarget (self))
-			return;
-	}
-
-	if ((self->monsterinfo.search_time) && (level.time > (self->monsterinfo.search_time + 20)))
-	{
-		M_MoveToGoal (self, dist);
-		self->monsterinfo.search_time = 0;
-//		dprint("search timeout\n");
-		return;
-	}
-
-	save = self->goalentity;
-	tempgoal = G_Spawn();
-	self->goalentity = tempgoal;
-
-	new = false;
-
-	if (!(self->monsterinfo.aiflags & AI_LOST_SIGHT))
-	{
-		// just lost sight of the player, decide where to go first
-//		dprint("lost sight of player, last seen at "); dprint(vtos(self.last_sighting)); dprint("\n");
-		self->monsterinfo.aiflags |= (AI_LOST_SIGHT | AI_PURSUIT_LAST_SEEN);
-		self->monsterinfo.aiflags &= ~(AI_PURSUE_NEXT | AI_PURSUE_TEMP);
-		new = true;
-	}
-
-	if (self->monsterinfo.aiflags & AI_PURSUE_NEXT)
-	{
-		self->monsterinfo.aiflags &= ~AI_PURSUE_NEXT;
-//		dprint("reached current goal: "); dprint(vtos(self.origin)); dprint(" "); dprint(vtos(self.last_sighting)); dprint(" "); dprint(ftos(vlen(self.origin - self.last_sighting))); dprint("\n");
-
-		// give ourself more time since we got this far
-		self->monsterinfo.search_time = level.time + 5;
-
-		if (self->monsterinfo.aiflags & AI_PURSUE_TEMP)
+		if (self->monsterinfo.aiflags & AI_SOUND_TARGET)
 		{
-//			dprint("was temp goal; retrying original\n");
-			self->monsterinfo.aiflags &= ~AI_PURSUE_TEMP;
-			marker = NULL;
-			VectorCopy (self->monsterinfo.saved_goal, self->monsterinfo.last_sighting);
+			VectorSubtract(self->s.origin, self->enemy->s.origin, v);
+			if (VectorLength(v) < 64)
+			{
+				self->monsterinfo.aiflags |= (AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
+				self->monsterinfo.stand(self);
+				return;
+			}
+
+			M_MoveToGoal(self, dist);
+
+			if (!FindTarget(self))
+				return;
+		}
+
+		if (ai_checkattack(self, dist))
+			return;
+
+		if (self->monsterinfo.attack_state == AS_SLIDING)
+		{
+			ai_run_slide(self, dist);
+			return;
+		}
+
+		if (enemy_vis)
+		{
+			//		if (self.aiflags & AI_LOST_SIGHT)
+			//			dprint("regained sight\n");
+			M_MoveToGoal(self, dist);
+			self->monsterinfo.aiflags &= ~AI_LOST_SIGHT;
+			VectorCopy(self->enemy->s.origin, self->monsterinfo.last_sighting);
+			self->monsterinfo.trail_time = level.time;
+			return;
+		}
+
+		// coop will change to another enemy if visible
+		if (coop->value)
+		{	// FIXME: insane guys get mad with this, which causes crashes!
+			if (FindTarget(self))
+				return;
+		}
+
+		if ((self->monsterinfo.search_time) && (level.time > (self->monsterinfo.search_time + 20)))
+		{
+			M_MoveToGoal(self, dist);
+			self->monsterinfo.search_time = 0;
+			//		dprint("search timeout\n");
+			return;
+		}
+
+		save = self->goalentity;
+		tempgoal = G_Spawn();
+		self->goalentity = tempgoal;
+
+		new = false;
+
+		if (!(self->monsterinfo.aiflags & AI_LOST_SIGHT))
+		{
+			// just lost sight of the player, decide where to go first
+	//		dprint("lost sight of player, last seen at "); dprint(vtos(self.last_sighting)); dprint("\n");
+			self->monsterinfo.aiflags |= (AI_LOST_SIGHT | AI_PURSUIT_LAST_SEEN);
+			self->monsterinfo.aiflags &= ~(AI_PURSUE_NEXT | AI_PURSUE_TEMP);
 			new = true;
 		}
-		else if (self->monsterinfo.aiflags & AI_PURSUIT_LAST_SEEN)
+
+		if (self->monsterinfo.aiflags & AI_PURSUE_NEXT)
 		{
-			self->monsterinfo.aiflags &= ~AI_PURSUIT_LAST_SEEN;
-			marker = PlayerTrail_PickFirst (self);
-		}
-		else
-		{
-			marker = PlayerTrail_PickNext (self);
-		}
+			self->monsterinfo.aiflags &= ~AI_PURSUE_NEXT;
+			//		dprint("reached current goal: "); dprint(vtos(self.origin)); dprint(" "); dprint(vtos(self.last_sighting)); dprint(" "); dprint(ftos(vlen(self.origin - self.last_sighting))); dprint("\n");
 
-		if (marker)
-		{
-			VectorCopy (marker->s.origin, self->monsterinfo.last_sighting);
-			self->monsterinfo.trail_time = marker->timestamp;
-			self->s.angles[YAW] = self->ideal_yaw = marker->s.angles[YAW];
-//			dprint("heading is "); dprint(ftos(self.ideal_yaw)); dprint("\n");
+					// give ourself more time since we got this far
+			self->monsterinfo.search_time = level.time + 5;
 
-//			debug_drawline(self.origin, self.last_sighting, 52);
-			new = true;
-		}
-	}
-
-	VectorSubtract (self->s.origin, self->monsterinfo.last_sighting, v);
-	d1 = VectorLength(v);
-	if (d1 <= dist)
-	{
-		self->monsterinfo.aiflags |= AI_PURSUE_NEXT;
-		dist = d1;
-	}
-
-	VectorCopy (self->monsterinfo.last_sighting, self->goalentity->s.origin);
-
-	if (new)
-	{
-//		gi.dprintf("checking for course correction\n");
-
-		tr = gi.trace(self->s.origin, self->mins, self->maxs, self->monsterinfo.last_sighting, self, MASK_PLAYERSOLID);
-		if (tr.fraction < 1)
-		{
-			VectorSubtract (self->goalentity->s.origin, self->s.origin, v);
-			d1 = VectorLength(v);
-			center = tr.fraction;
-			d2 = d1 * ((center+1)/2);
-			self->s.angles[YAW] = self->ideal_yaw = vectoyaw(v);
-			AngleVectors(self->s.angles, v_forward, v_right, NULL);
-
-			VectorSet(v, d2, -16, 0);
-			G_ProjectSource (self->s.origin, v, v_forward, v_right, left_target);
-			tr = gi.trace(self->s.origin, self->mins, self->maxs, left_target, self, MASK_PLAYERSOLID);
-			left = tr.fraction;
-
-			VectorSet(v, d2, 16, 0);
-			G_ProjectSource (self->s.origin, v, v_forward, v_right, right_target);
-			tr = gi.trace(self->s.origin, self->mins, self->maxs, right_target, self, MASK_PLAYERSOLID);
-			right = tr.fraction;
-
-			center = (d1*center)/d2;
-			if (left >= center && left > right)
+			if (self->monsterinfo.aiflags & AI_PURSUE_TEMP)
 			{
-				if (left < 1)
-				{
-					VectorSet(v, d2 * left * 0.5, -16, 0);
-					G_ProjectSource (self->s.origin, v, v_forward, v_right, left_target);
-//					gi.dprintf("incomplete path, go part way and adjust again\n");
-				}
-				VectorCopy (self->monsterinfo.last_sighting, self->monsterinfo.saved_goal);
-				self->monsterinfo.aiflags |= AI_PURSUE_TEMP;
-				VectorCopy (left_target, self->goalentity->s.origin);
-				VectorCopy (left_target, self->monsterinfo.last_sighting);
-				VectorSubtract (self->goalentity->s.origin, self->s.origin, v);
-				self->s.angles[YAW] = self->ideal_yaw = vectoyaw(v);
-//				gi.dprintf("adjusted left\n");
-//				debug_drawline(self.origin, self.last_sighting, 152);
+				//			dprint("was temp goal; retrying original\n");
+				self->monsterinfo.aiflags &= ~AI_PURSUE_TEMP;
+				marker = NULL;
+				VectorCopy(self->monsterinfo.saved_goal, self->monsterinfo.last_sighting);
+				new = true;
 			}
-			else if (right >= center && right > left)
+			else if (self->monsterinfo.aiflags & AI_PURSUIT_LAST_SEEN)
 			{
-				if (right < 1)
-				{
-					VectorSet(v, d2 * right * 0.5, 16, 0);
-					G_ProjectSource (self->s.origin, v, v_forward, v_right, right_target);
-//					gi.dprintf("incomplete path, go part way and adjust again\n");
-				}
-				VectorCopy (self->monsterinfo.last_sighting, self->monsterinfo.saved_goal);
-				self->monsterinfo.aiflags |= AI_PURSUE_TEMP;
-				VectorCopy (right_target, self->goalentity->s.origin);
-				VectorCopy (right_target, self->monsterinfo.last_sighting);
-				VectorSubtract (self->goalentity->s.origin, self->s.origin, v);
-				self->s.angles[YAW] = self->ideal_yaw = vectoyaw(v);
-//				gi.dprintf("adjusted right\n");
-//				debug_drawline(self.origin, self.last_sighting, 152);
+				self->monsterinfo.aiflags &= ~AI_PURSUIT_LAST_SEEN;
+				marker = PlayerTrail_PickFirst(self);
+			}
+			else
+			{
+				marker = PlayerTrail_PickNext(self);
+			}
+
+			if (marker)
+			{
+				VectorCopy(marker->s.origin, self->monsterinfo.last_sighting);
+				self->monsterinfo.trail_time = marker->timestamp;
+				self->s.angles[YAW] = self->ideal_yaw = marker->s.angles[YAW];
+				//			dprint("heading is "); dprint(ftos(self.ideal_yaw)); dprint("\n");
+
+				//			debug_drawline(self.origin, self.last_sighting, 52);
+				new = true;
 			}
 		}
-//		else gi.dprintf("course was fine\n");
+
+		VectorSubtract(self->s.origin, self->monsterinfo.last_sighting, v);
+		d1 = VectorLength(v);
+		if (d1 <= dist)
+		{
+			self->monsterinfo.aiflags |= AI_PURSUE_NEXT;
+			dist = d1;
+		}
+
+		VectorCopy(self->monsterinfo.last_sighting, self->goalentity->s.origin);
+
+		if (new)
+		{
+			//		gi.dprintf("checking for course correction\n");
+
+			tr = gi.trace(self->s.origin, self->mins, self->maxs, self->monsterinfo.last_sighting, self, MASK_PLAYERSOLID);
+			if (tr.fraction < 1)
+			{
+				VectorSubtract(self->goalentity->s.origin, self->s.origin, v);
+				d1 = VectorLength(v);
+				center = tr.fraction;
+				d2 = d1 * ((center + 1) / 2);
+				self->s.angles[YAW] = self->ideal_yaw = vectoyaw(v);
+				AngleVectors(self->s.angles, v_forward, v_right, NULL);
+
+				VectorSet(v, d2, -16, 0);
+				G_ProjectSource(self->s.origin, v, v_forward, v_right, left_target);
+				tr = gi.trace(self->s.origin, self->mins, self->maxs, left_target, self, MASK_PLAYERSOLID);
+				left = tr.fraction;
+
+				VectorSet(v, d2, 16, 0);
+				G_ProjectSource(self->s.origin, v, v_forward, v_right, right_target);
+				tr = gi.trace(self->s.origin, self->mins, self->maxs, right_target, self, MASK_PLAYERSOLID);
+				right = tr.fraction;
+
+				center = (d1 * center) / d2;
+				if (left >= center && left > right)
+				{
+					if (left < 1)
+					{
+						VectorSet(v, d2 * left * 0.5, -16, 0);
+						G_ProjectSource(self->s.origin, v, v_forward, v_right, left_target);
+						//					gi.dprintf("incomplete path, go part way and adjust again\n");
+					}
+					VectorCopy(self->monsterinfo.last_sighting, self->monsterinfo.saved_goal);
+					self->monsterinfo.aiflags |= AI_PURSUE_TEMP;
+					VectorCopy(left_target, self->goalentity->s.origin);
+					VectorCopy(left_target, self->monsterinfo.last_sighting);
+					VectorSubtract(self->goalentity->s.origin, self->s.origin, v);
+					self->s.angles[YAW] = self->ideal_yaw = vectoyaw(v);
+					//				gi.dprintf("adjusted left\n");
+					//				debug_drawline(self.origin, self.last_sighting, 152);
+				}
+				else if (right >= center && right > left)
+				{
+					if (right < 1)
+					{
+						VectorSet(v, d2 * right * 0.5, 16, 0);
+						G_ProjectSource(self->s.origin, v, v_forward, v_right, right_target);
+						//					gi.dprintf("incomplete path, go part way and adjust again\n");
+					}
+					VectorCopy(self->monsterinfo.last_sighting, self->monsterinfo.saved_goal);
+					self->monsterinfo.aiflags |= AI_PURSUE_TEMP;
+					VectorCopy(right_target, self->goalentity->s.origin);
+					VectorCopy(right_target, self->monsterinfo.last_sighting);
+					VectorSubtract(self->goalentity->s.origin, self->s.origin, v);
+					self->s.angles[YAW] = self->ideal_yaw = vectoyaw(v);
+					//				gi.dprintf("adjusted right\n");
+					//				debug_drawline(self.origin, self.last_sighting, 152);
+				}
+			}
+			//		else gi.dprintf("course was fine\n");
+		}
+
+		M_MoveToGoal(self, dist);
+
+		G_FreeEdict(tempgoal);
+
+		if (self)
+			self->goalentity = save;
+	} else {
+		self->monsterinfo.stand(self);
 	}
-
-	M_MoveToGoal (self, dist);
-
-	G_FreeEdict(tempgoal);
-
-	if (self)
-		self->goalentity = save;
 }

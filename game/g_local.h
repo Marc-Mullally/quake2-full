@@ -656,6 +656,17 @@ qboolean CanDamage (edict_t *targ, edict_t *inflictor);
 void T_Damage (edict_t *targ, edict_t *inflictor, edict_t *attacker, vec3_t dir, vec3_t point, vec3_t normal, int damage, int knockback, int dflags, int mod);
 void T_RadiusDamage (edict_t *inflictor, edict_t *attacker, float damage, edict_t *ignore, float radius, int mod);
 
+void CatchAttempt(edict_t* trainer, edict_t* target);
+void StartBattle(edict_t* trainer, edict_t* target);
+void EndBattle(edict_t* trainer, edict_t* target);
+void UpdateBattleUI(edict_t* trainer, edict_t* target);
+char* createHPBar(int health, int maxHealth);
+void updateChoices(edict_t* ent);
+qboolean RunAttempt(edict_t* trainer);
+float rollNumber();
+
+
+
 // damage flags
 #define DAMAGE_RADIUS			0x00000001	// damage was indirect
 #define DAMAGE_NO_ARMOR			0x00000002	// armour does not protect from this damage
@@ -754,7 +765,7 @@ void InitClientPersistant (gclient_t *client);
 void InitClientResp (gclient_t *client);
 void InitBodyQue (void);
 void ClientBeginServerFrame (edict_t *ent);
-
+void BattleThink(edict_t* ent);
 //
 // g_player.c
 //
@@ -825,6 +836,118 @@ void GetChaseTarget(edict_t *ent);
 #define	ANIM_DEATH		5
 #define	ANIM_REVERSE	6
 
+typedef enum {
+	ASLEEP,
+	BURNED,
+	FROZEN,
+	PARALYZED,
+	POISONED,
+	NONE
+} status_effect;
+
+typedef enum {
+	NORMAL,
+	FIRE,
+	WATER,
+	GRASS,
+	ELECTRIC,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DRAGON,
+	DARK,
+	STEEL,
+	FAIRY,
+	MONOTYPE
+} pokemonType;
+
+typedef struct {
+	char*			name;
+	int				moveType; // 1 = Physical, 3 = Special, -1 = Status
+	int				power;
+	int				priority;
+	float			accuracy;
+	pokemonType		type;
+	int				levelRequirement;
+	int				selfStateChange[8]; // 1-6 is pokemon stats, 7 and 8 are accuracy and evasion (0 isnt used but there to align)
+	int				enemyStateChange[8];
+	float			statusEffectChance;
+	status_effect	statusEffect;
+	float			stateChangeChance;
+
+} pokemonMove;
+
+
+
+typedef struct
+{
+	char*			classname;
+	char*			nickname;
+	int				health;
+	// max health is just their hp stat (stats[0])
+	int				level;
+	int				experience;
+	status_effect	statusEffect;
+	pokemonMove		learnableMoves[16];
+	pokemonMove		moveSet[4];
+	pokemonType		type[2];
+
+	/*
+	Order: 
+	0: Health
+	1: Attack
+	2: Defense
+	3: Sp.Atk
+	4: Sp.Def
+	5: Speed
+	*/ 
+
+	int				baseStats[6];
+	int				IVStats[6];
+	int				EVStats[6];
+	int				stats[6];
+	int				nature[2]; // First value is +, second value is -
+	int				statStages[8];
+	
+	// moves
+	// ADD MORE LATER. copy these stats to edict_t. structure serves to store data of the "pokemon"
+} pokemonStruct;
+
+typedef enum {
+	BATTLE_WAIT_ACTION,
+	BATTLE_PERFORM_ACTION,
+	BATTLE_IDLE
+} battle_state;
+
+typedef enum {
+	MAIN,
+	FIGHT,
+	BAG,
+	POKEMON,
+
+	HEALING,
+	STATUS,
+	BATTLEITEMS,
+	REVIVES,
+	POKEBALLS,
+	ESCAPE
+
+} menu_state;
+
+
+
+void calculateStat(pokemonStruct* pokemonStats, int i);
+void sendOut(edict_t* trainer, edict_t* target, int pokemonIndex);
+void retrievePokemon(edict_t* trainer);
+void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumber);
+void doAttack(pokemonMove* move, edict_t* opponent);
+char* statStageChanges(edict_t* pokemon, int stageChanges[]);
 
 // client data that stays across multiple level loads
 typedef struct
@@ -840,6 +963,25 @@ typedef struct
 	int			health;
 	int			max_health;
 	int			savedFlags;
+	
+	pokemonStruct		party[6];	// GRICKUS!!! put party stuff here
+	char*				choices[6];
+	int					selection;
+	int					selected;
+	menu_state			menu;
+
+	//
+	int			partySize;
+	qboolean	catchMode;
+	edict_t*	pokemon;
+	edict_t*	opponent;
+	battle_state battleState;
+	int			runAttempts;
+	int			pokemonIndex;
+	vec3_t		pokemonPosition;
+	float		battleDelay;
+	qboolean	playerFirst;
+
 
 	int			selected_item;
 	int			inventory[MAX_ITEMS];
@@ -1056,6 +1198,12 @@ struct edict_s
 	int			gib_health;
 	int			deadflag;
 	qboolean	show_hostile;
+
+	pokemonStruct pokemonStats;
+
+	qboolean	inBattle;		// GRICKUS
+	qboolean	alreadyMoved;
+	int			moveSelected;
 
 	float		powerarmor_time;
 

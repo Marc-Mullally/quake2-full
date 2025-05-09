@@ -989,7 +989,7 @@ typedef enum
 #define	ATTN_STATIC             3	// diminish very rapidly with distance
 
 
-// player_state->stats[] indexes
+// player_state->stats[] indexes GRICKUS!!!
 #define STAT_HEALTH_ICON		0
 #define	STAT_HEALTH				1
 #define	STAT_AMMO_ICON			2
@@ -997,17 +997,49 @@ typedef enum
 #define	STAT_ARMOR_ICON			4
 #define	STAT_ARMOR				5
 #define	STAT_SELECTED_ICON		6
-#define	STAT_PICKUP_ICON		7
-#define	STAT_PICKUP_STRING		8
-#define	STAT_TIMER_ICON			9
-#define	STAT_TIMER				10
-#define	STAT_HELPICON			11
+
+
+
 #define	STAT_SELECTED_ITEM		12
 #define	STAT_LAYOUTS			13
 #define	STAT_FRAGS				14
 #define	STAT_FLASHES			15		// cleared each frame, 1 = health, 2 = armor
-#define STAT_CHASE				16
-#define STAT_SPECTATOR			17
+
+
+//GRICKUS!!! 
+#define STAT_INBATTLE			18
+
+/* dont need
+#define STAT_BATTLE_BOXES		19
+*/
+#define STAT_BATTLE_BOTTOMBOXES	20
+
+
+#define STAT_BATTLE_CHOICE1		21
+#define STAT_BATTLE_CHOICE2		22
+#define STAT_BATTLE_CHOICE3		23
+#define STAT_BATTLE_CHOICE4		24
+#define STAT_BATTLE_CHOICE5		25
+#define STAT_BATTLE_CHOICE6		26
+
+#define STAT_BATTLE_POKEMON_HP			27
+#define STAT_BATTLE_OPPONENT_HP			28
+#define STAT_BATTLE_POKEMON_NAME		29
+#define STAT_BATTLE_OPPONENT_NAME		30
+#define STAT_BATTLE_POKEMON_LEVEL		31
+#define STAT_BATTLE_OPPONENT_LEVEL		9 
+
+
+#define	STAT_BATTLE_CHOICE1_SELECTED		7
+#define	STAT_BATTLE_CHOICE2_SELECTED		8
+#define	STAT_BATTLE_CHOICE3_SELECTED		10
+#define	STAT_BATTLE_CHOICE4_SELECTED		11
+#define STAT_BATTLE_CHOICE5_SELECTED		16
+#define STAT_BATTLE_CHOICE6_SELECTED		17
+
+
+
+//
 
 #define	MAX_STATS				32
 
@@ -1109,6 +1141,21 @@ ROGUE - VERSIONS
 #define	CS_PLAYERSKINS		(CS_ITEMS+MAX_ITEMS)
 #define CS_GENERAL			(CS_PLAYERSKINS+MAX_CLIENTS)
 #define	MAX_CONFIGSTRINGS	(CS_GENERAL+MAX_GENERAL)
+
+#define CS_CHOICE1			(CS_GENERAL + 10)
+#define CS_CHOICE2			(CS_GENERAL + 11)
+#define CS_CHOICE3			(CS_GENERAL + 12)
+#define CS_CHOICE4			(CS_GENERAL + 13)
+#define CS_CHOICE5			(CS_GENERAL + 14)
+#define CS_CHOICE6			(CS_GENERAL + 15)
+
+#define CS_POKEMON_HP			(CS_GENERAL + 16)
+#define CS_OPPONENT_HP			(CS_GENERAL + 17)
+#define CS_POKEMON_NAME			(CS_GENERAL + 18)
+#define CS_OPPONENT_NAME		(CS_GENERAL + 19)
+#define CS_POKEMON_LEVEL		(CS_GENERAL + 20)
+#define CS_OPPONENT_LEVEL		(CS_GENERAL + 21)
+
 
 
 //==============================================

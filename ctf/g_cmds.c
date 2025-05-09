@@ -989,7 +989,8 @@ void ClientCommand (edict_t *ent)
 	if (level.intermissiontime)
 		return;
 
-	if (Q_stricmp (cmd, "use") == 0)
+	if (Q_stricmp(cmd, "use") == 0)
+		Com_Printf("g");
 		Cmd_Use_f (ent);
 	else if (Q_stricmp (cmd, "drop") == 0)
 		Cmd_Drop_f (ent);
@@ -1059,7 +1060,8 @@ void ClientCommand (edict_t *ent)
 		CTFPlayerList(ent);
 	} else if (Q_stricmp(cmd, "observer") == 0) {
 		CTFObserver(ent);
-	}
+	} else if (Q_stricmp(cmd, "select") == 0)
+		Cmd_Use_f(ent);
 //ZOID
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);

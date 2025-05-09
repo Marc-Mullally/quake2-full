@@ -1162,8 +1162,7 @@ void SCR_ExecuteLayoutString (char *s)
 			SCR_DrawField (x, y, color, width, value);
 			continue;
 		}
-
-
+	
 		if (!strcmp(token, "stat_string"))
 		{
 			token = COM_Parse (&s);
@@ -1176,7 +1175,8 @@ void SCR_ExecuteLayoutString (char *s)
 			DrawString (x, y, cl.configstrings[index]);
 			continue;
 		}
-
+		
+		
 		if (!strcmp(token, "cstring"))
 		{
 			token = COM_Parse (&s);
@@ -1220,6 +1220,7 @@ void SCR_ExecuteLayoutString (char *s)
 			continue;
 		}
 
+		
 
 	}
 }

@@ -175,6 +175,9 @@ void IN_UseUp (void) {KeyUp(&in_use);}
 
 void IN_Impulse (void) {in_impulse=atoi(Cmd_Argv(1));}
 
+void IN_SelectDown(void) { Com_Printf("selected"); }
+void IN_SelectUp(void) { Com_Printf(""); }
+
 /*
 ===============
 CL_KeyState
@@ -273,7 +276,7 @@ CL_BaseMove
 Send the intended movement message to the server
 ================
 */
-void CL_BaseMove (usercmd_t *cmd)
+void CL_BaseMove (usercmd_t *cmd) 
 {	
 	CL_AdjustAngles ();
 	
@@ -284,13 +287,15 @@ void CL_BaseMove (usercmd_t *cmd)
 	{
 		cmd->sidemove += cl_sidespeed->value * CL_KeyState (&in_right);
 		cmd->sidemove -= cl_sidespeed->value * CL_KeyState (&in_left);
+		
 	}
-
+	
 	cmd->sidemove += cl_sidespeed->value * CL_KeyState (&in_moveright);
 	cmd->sidemove -= cl_sidespeed->value * CL_KeyState (&in_moveleft);
 
 	cmd->upmove += cl_upspeed->value * CL_KeyState (&in_up);
 	cmd->upmove -= cl_upspeed->value * CL_KeyState (&in_down);
+
 
 	if (! (in_klook.state & 1) )
 	{	
@@ -439,7 +444,8 @@ void CL_InitInput (void)
 	Cmd_AddCommand ("impulse", IN_Impulse);
 	Cmd_AddCommand ("+klook", IN_KLookDown);
 	Cmd_AddCommand ("-klook", IN_KLookUp);
-
+	Cmd_AddCommand ("+select", IN_SelectDown);
+	Cmd_AddCommand ("-select", IN_SelectUp);
 	cl_nodelta = Cvar_Get ("cl_nodelta", "0", 0);
 }
 
