@@ -663,6 +663,7 @@ void UpdateBattleUI(edict_t* trainer, edict_t* target);
 char* createHPBar(int health, int maxHealth);
 void updateChoices(edict_t* ent);
 qboolean RunAttempt(edict_t* trainer);
+
 float rollNumber();
 
 
@@ -842,7 +843,8 @@ typedef enum {
 	FROZEN,
 	PARALYZED,
 	POISONED,
-	NONE
+	NONE,
+	ALL
 } status_effect;
 
 typedef enum {
@@ -920,6 +922,29 @@ typedef struct
 } pokemonStruct;
 
 typedef enum {
+	HEALING_ITEM,
+	STATUS_CLEAR_ITEM,
+	BATTLE_ITEM,
+	REVIVES_ITEM,
+	POKEBALLS_ITEM,
+	ESCAPE_ITEM
+} pokemonItemType;
+
+typedef struct
+{
+	char*			name;
+	int				healthAmount;
+	pokemonItemType	itemType;
+	status_effect	statusClear;
+	int				statStages[8];
+	float			revivePercent;
+	float			catchRate;
+	int				amount;
+
+} pokemonItem;
+
+
+typedef enum {
 	BATTLE_WAIT_ACTION,
 	BATTLE_PERFORM_ACTION,
 	BATTLE_IDLE
@@ -946,8 +971,13 @@ void calculateStat(pokemonStruct* pokemonStats, int i);
 void sendOut(edict_t* trainer, edict_t* target, int pokemonIndex);
 void retrievePokemon(edict_t* trainer);
 void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumber);
-void doAttack(pokemonMove* move, edict_t* opponent);
-char* statStageChanges(edict_t* pokemon, int stageChanges[]);
+char* statStageChanges(pokemonStruct* pokemon, int stageChanges[]);
+void useItem(edict_t* trainer, pokemonStruct* pokemon, pokemonItem* item);
+char* statusToString(status_effect statusEffect);
+qboolean isTeamDead(edict_t* trainer);
+qboolean isEndOfBattle(edict_t* trainer, edict_t* opponent);
+float catchChance(edict_t* pokemon, pokemonItem* item);
+void rewardPokemon(edict_t* trainer, pokemonStruct* pokemon, pokemonStruct opponent, char* output);
 
 // client data that stays across multiple level loads
 typedef struct
@@ -964,24 +994,38 @@ typedef struct
 	int			max_health;
 	int			savedFlags;
 	
+
+	// GRICKUS!!!
 	pokemonStruct		party[6];	// GRICKUS!!! put party stuff here
 	char*				choices[6];
 	int					selection;
 	int					selected;
 	menu_state			menu;
 
-	//
-	int			partySize;
-	qboolean	catchMode;
-	edict_t*	pokemon;
-	edict_t*	opponent;
-	battle_state battleState;
-	int			runAttempts;
-	int			pokemonIndex;
-	vec3_t		pokemonPosition;
-	float		battleDelay;
-	qboolean	playerFirst;
+	int				partySize;
+	qboolean		catchMode;
+	edict_t*		pokemon;
+	edict_t*		opponent;
+	battle_state	battleState;
+	int				runAttempts;
+	int				pokemonIndex;
+	vec3_t			pokemonPosition;
+	float			battleDelay;
+	qboolean		playerFirst;
+	pokemonItem*	itemUsed;
+	qboolean		forcedSwitch;
+	pokemonMove*	learningMove;
 
+
+	pokemonItem pokeBag[64];
+	pokemonItem* healingItems[6];
+	pokemonItem* statusClearItems[6];
+	pokemonItem* battleItems[6];
+	pokemonItem* reviveItems[6];
+	pokemonItem* pokeballs[6];
+	pokemonItem* escapeItems[6];
+	pokemonItem* currentBag[6];
+	//
 
 	int			selected_item;
 	int			inventory[MAX_ITEMS];

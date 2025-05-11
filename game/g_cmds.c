@@ -953,8 +953,9 @@ void Cmd_SelectChange(edict_t* ent, char* direction) {
 
 
 void Cmd_SelectBack(edict_t* ent) {
-	ent->client->pers.selection = 0;
-	if (ent->inBattle && ent->client->pers.battleState != BATTLE_PERFORM_ACTION) {
+	
+	if (ent->inBattle && ent->client->pers.battleState != BATTLE_PERFORM_ACTION && !ent->client->pers.forcedSwitch) {
+		ent->client->pers.selection = 0;
 		if (ent->client->pers.menu == HEALING ||
 			ent->client->pers.menu == STATUS  ||
 			ent->client->pers.menu == BATTLEITEMS ||
@@ -1075,7 +1076,9 @@ void ClientCommand (edict_t *ent)
 		Cmd_SelectChange(ent, "right");
 	else if (Q_stricmp(cmd, "selectBack") == 0)
 		Cmd_SelectBack(ent);
-
+	else if (Q_stricmp(cmd, "helpMenu") == 0) {
+		ent->client->ps.stats[STAT_HELPMENU] = !ent->client->ps.stats[STAT_HELPMENU];
+	} 
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

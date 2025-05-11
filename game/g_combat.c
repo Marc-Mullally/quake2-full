@@ -605,19 +605,23 @@ void StartBattle(edict_t* trainer, edict_t* target) {
 	trainer->client->pers.selected = -1;
 	trainer->client->pers.opponent->moveSelected = -1;
 
-	int clear[] = { 0,0,0,0,0,0,0,0 };
-	memcpy(trainer->client->pers.party[trainer->client->pers.pokemonIndex].statStages, clear, sizeof(trainer->client->pers.party[trainer->client->pers.pokemonIndex].statStages));
-	memcpy(target->pokemonStats.statStages, clear, sizeof(target->pokemonStats.statStages));
 	
 	VectorAdd(trainer->s.origin, target->s.origin, trainer->client->pers.pokemonPosition);
 	VectorScale(trainer->client->pers.pokemonPosition, 0.5, trainer->client->pers.pokemonPosition);
 	trainer->client->pers.pokemonPosition[2] += 20;
+	sendOut(trainer, target, -1);
+
+	int clear[] = { 0,0,0,0,0,0,0,0 };
+	memcpy(trainer->client->pers.party[trainer->client->pers.pokemonIndex].statStages, clear, sizeof(trainer->client->pers.party[trainer->client->pers.pokemonIndex].statStages));
+	memcpy(target->pokemonStats.statStages, clear, sizeof(target->pokemonStats.statStages));
 
 	
-	sendOut(trainer, target, -1);
 	trainer->client->pers.battleState = BATTLE_WAIT_ACTION;
 	trainer->client->pers.opponent->alreadyMoved = false;
 	trainer->client->pers.pokemon->alreadyMoved = false;
+
+	target->health = target->pokemonStats.health;
+	target->max_health = target->pokemonStats.stats[0];
 
 	gi.centerprintf(trainer, "%s vs %s\n", trainer->classname, target->pokemonStats.nickname);
 
@@ -629,7 +633,7 @@ void StartBattle(edict_t* trainer, edict_t* target) {
 void EndBattle(edict_t* trainer, edict_t* target) {
 
 	trainer->inBattle = false;
-	target->inBattle = false;
+	
 	/*
 	trainer->client->pers.opponent = NULL;
 	trainer->client->pers.pokemon = NULL;
@@ -637,12 +641,16 @@ void EndBattle(edict_t* trainer, edict_t* target) {
 	trainer->client->pers.selection = -1;
 	trainer->client->pers.selected = -1;
 	retrievePokemon(trainer);
-	target->health = target->pokemonStats.health;
+	
 
 	trainer->client->pers.battleState = BATTLE_WAIT_ACTION;
 	trainer->client->pers.menu = MAIN;
-	trainer->client->pers.opponent->moveSelected = -1;
-	trainer->client->pers.opponent->alreadyMoved = false;
+	if (target) {
+		target->inBattle = false;
+		target->health = target->pokemonStats.health;
+		target->moveSelected = -1;
+		target->alreadyMoved = false;
+	}
 	trainer->client->pers.pokemon->alreadyMoved = false;
 
 	UpdateBattleUI(trainer, target);
@@ -771,7 +779,11 @@ void sendOut(edict_t* trainer, edict_t* target, int pokemonIndex) {
 
 	trainer->client->pers.pokemon = pokemonEntity;
 	pokemonEntity->inBattle = true;
-	
+	trainer->client->pers.forcedSwitch = false;
+	gi.centerprintf("%s sent out %s!", trainer->classname, trainer->client->pers.pokemon->pokemonStats.nickname);
+
+	updateChoices(trainer);
+	UpdateBattleUI(trainer, target);
 }
 
 void retrievePokemon(edict_t* trainer) {
@@ -854,13 +866,22 @@ void updateChoices(edict_t* ent) {
 		}
 
 		return;
-	case HEALING:		ent->client->pers.choices[0] = "POTION"; ent->client->pers.choices[1] = "HYPER"; ent->client->pers.choices[2] = "MAX"; ent->client->pers.choices[3] = "SUPER"; ent->client->pers.choices[4] = "FULL"; ent->client->pers.choices[5] = "";		return;
-	case STATUS:		ent->client->pers.choices[0] = "ANTIDOTE"; ent->client->pers.choices[1] = "BURN HEAL"; ent->client->pers.choices[2] = "ICE HEAL"; ent->client->pers.choices[3] = "AWAKENING"; ent->client->pers.choices[4] = "PARALYZE HEAL"; ent->client->pers.choices[5] = "FULL HEAL";	return;
-	case BATTLEITEMS:	ent->client->pers.choices[0] = "X ATTACK"; ent->client->pers.choices[1] = "X DEF"; ent->client->pers.choices[2] = "X SP.ATK"; ent->client->pers.choices[3] = "X SP.DEF"; ent->client->pers.choices[4] = "X SPEED"; ent->client->pers.choices[5] = "X ACC";		return;
-	case REVIVES:		ent->client->pers.choices[0] = "REVIVES"; ent->client->pers.choices[1] = "MAX REV."; ent->client->pers.choices[2] = ""; ent->client->pers.choices[3] = ""; ent->client->pers.choices[4] = ""; ent->client->pers.choices[5] = "";											return;
-	case POKEBALLS:		ent->client->pers.choices[0] = ""; ent->client->pers.choices[1] = ""; ent->client->pers.choices[2] = ""; ent->client->pers.choices[3] = ""; ent->client->pers.choices[4] = ""; ent->client->pers.choices[5] = "";					return;
-	case ESCAPE:		ent->client->pers.choices[0] = "POKEDOLL"; ent->client->pers.choices[1] = "F. TAIL"; ent->client->pers.choices[2] = "POKETOY"; ent->client->pers.choices[3] = ""; ent->client->pers.choices[4] = ""; ent->client->pers.choices[5] = "";					return;
 
+	case HEALING:
+	case STATUS:
+	case BATTLEITEMS:
+	case REVIVES:
+	case POKEBALLS:
+	case ESCAPE:
+		for (int i = 0; i < 6; i++) {
+			if (ent->client->pers.currentBag[i]) {
+				ent->client->pers.choices[i] = ent->client->pers.currentBag[i]->name;
+			}
+			else {
+				ent->client->pers.choices[i] = "";
+			}
+		}		
+		return;
 	}
 }
 
@@ -886,43 +907,43 @@ float TypeChart[18][18] = {
 	{  1, .5,  1,  1,  1,  1,  2, .5,  1,  1,  1,  1,  1,  1,  2,  2, .5,  1} // Fairy
 };
 
-char* statStageChanges(edict_t* pokemon, int stageChanges[]) {
+char* statStageChanges(pokemonStruct* pokemon, int stageChanges[]) {
 	char statusOutput[360];
 	statusOutput[0] = '\0';
 	char* stat[] = { "health", "attack", "defense", "special attack", "special defense", "speed", "accuracy", "evasion"};
 	char addon[360];
-	Com_Printf("%s:\n", pokemon->pokemonStats.nickname);
+	Com_Printf("%s:\n", pokemon->nickname);
 	for (int i = 0; i < 8; i++) {
 		
 		if (stageChanges[i] == 1) {
-			snprintf(addon, sizeof(addon), "%s's %s rose!\n", pokemon->pokemonStats.nickname, stat[i]);
+			snprintf(addon, sizeof(addon), "%s's %s rose!\n", pokemon->nickname, stat[i]);
 		} else if (stageChanges[i] == 2) {
-			snprintf(addon, sizeof(addon), "%s's %s rose sharply!\n", pokemon->pokemonStats.nickname, stat[i]);
+			snprintf(addon, sizeof(addon), "%s's %s rose sharply!\n", pokemon->nickname, stat[i]);
 		} else if (stageChanges[i] >= 3) {
-			snprintf(addon, sizeof(addon), "%s's %s rose drastically!\n", pokemon->pokemonStats.nickname, stat[i]);
+			snprintf(addon, sizeof(addon), "%s's %s rose drastically!\n", pokemon->nickname, stat[i]);
 		} else if (stageChanges[i] == -1) {
-			snprintf(addon, sizeof(addon), "%s's %s fell!\n", pokemon->pokemonStats.nickname, stat[i]);
+			snprintf(addon, sizeof(addon), "%s's %s fell!\n", pokemon->nickname, stat[i]);
 		} else if (stageChanges[i] == -2) {
-			snprintf(addon, sizeof(addon), "%s's %s harshly fell!\n", pokemon->pokemonStats.nickname, stat[i]);
+			snprintf(addon, sizeof(addon), "%s's %s harshly fell!\n", pokemon->nickname, stat[i]);
 		} else if (stageChanges[i] <= -3) {
-			snprintf(addon, sizeof(addon), "%s's %s severely fell!\n", pokemon->pokemonStats.nickname, stat[i]);
+			snprintf(addon, sizeof(addon), "%s's %s severely fell!\n", pokemon->nickname, stat[i]);
 		} else {
 			snprintf(addon, sizeof(addon), "");
 		}
 		strcat(statusOutput, addon);
 
-		pokemon->pokemonStats.statStages[i] += stageChanges[i];
+		pokemon->statStages[i] += stageChanges[i];
 
 		snprintf(addon, sizeof(addon), "");
-		if (pokemon->pokemonStats.statStages[i] > 6) {
-			snprintf(addon, sizeof(addon), "%s's %s won't go any higher!\n", pokemon->pokemonStats.nickname, stat[i]);
-			pokemon->pokemonStats.statStages[i] = 6;
-		} else if (pokemon->pokemonStats.statStages[i] < -6) {
-			snprintf(addon, sizeof(addon), "%s's %s won't go any lower!\n", pokemon->pokemonStats.nickname, stat[i]);
-			pokemon->pokemonStats.statStages[i] = -6;
+		if (pokemon->statStages[i] > 6) {
+			snprintf(addon, sizeof(addon), "%s's %s won't go any higher!\n", pokemon->nickname, stat[i]);
+			pokemon->statStages[i] = 6;
+		} else if (pokemon->statStages[i] < -6) {
+			snprintf(addon, sizeof(addon), "%s's %s won't go any lower!\n", pokemon->nickname, stat[i]);
+			pokemon->statStages[i] = -6;
 		}
 		strcat(statusOutput, addon);
-		if (i != 0) { Com_Printf("%s: %i\n", stat[i], pokemon->pokemonStats.statStages[i]); }
+		if (i != 0) { Com_Printf("%s: %i\n", stat[i], pokemon->statStages[i]); }
 	}
 	Com_Printf("\n");
 	return statusOutput;
@@ -957,127 +978,143 @@ void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumbe
 	status_effect	statusEffect;
 
 	*/
-	pokemonMove move = pokemon->pokemonStats.moveSet[moveNumber];
-	char* output[360];
-	snprintf(output, sizeof(output), "");
-	if (pokemon->pokemonStats.statusEffect == ASLEEP) {
-		if (rollNumber() >= 1.0f/3.0f) {
-			snprintf(output, sizeof(output), "%s woke up!\n", pokemon->pokemonStats.nickname);
-			pokemon->pokemonStats.statusEffect = NONE;
-		} else {
-			gi.centerprintf("%s is fast asleep.", pokemon->pokemonStats.nickname);
-			return;
-		}
-	}
-
-	if (pokemon->pokemonStats.statusEffect == PARALYZED) {
-		if (rollNumber() >= .25f) {
-			gi.centerprintf("%s is paralyzed! It can't move!", pokemon->pokemonStats.nickname);
-			return;
-
-		}
-	}
-
-	char* usedMove[360];
-	snprintf(usedMove, sizeof(usedMove), "%s used %s!\n", pokemon->pokemonStats.nickname, move.name);
-	strcat(output, usedMove);
-	float modifiedAccuracy;
-	if (move.accuracy != -1) {
-		float adjustedStages = 1.0f;
-		int accuracyStages = pokemon->pokemonStats.statStages[6] - opponent->pokemonStats.statStages[7];
-		if (accuracyStages >= 0) {
-			adjustedStages = (3.0f + accuracyStages) / 3.0f;
-		}
-		else {
-			adjustedStages = 3.0f / (3.0f - accuracyStages);
-		}
-		modifiedAccuracy = move.accuracy * adjustedStages;
-	}
-	else {
-		modifiedAccuracy = 1.0f;
-	}
-
-	if (rollNumber() > modifiedAccuracy) {
-		char* missed[360];
-		snprintf(missed, sizeof(missed), "%s's attack missed!", pokemon->pokemonStats.nickname);
-		strcat(output, missed);
-		gi.centerprintf(trainer, output);
-		return;
-	}
-
-	float typeEffectiveness = 1.0f;
-	int attackerNum = (int)move.type;
-	for (int i = 0; i < 2; i++) {
-		if (opponent->pokemonStats.type[i] != MONOTYPE) {
-			typeEffectiveness *= TypeChart[attackerNum][(int)opponent->pokemonStats.type[i]];
-		}
-	}
-
-	if (typeEffectiveness != 0) {
-		
-		if (move.moveType != -1) {
-
-			qboolean crit = false;
-			float critMultiplier = 1.0f;
-			if (rollNumber() <= 1.0f / 24.0f) {
-				crit = true;
-				critMultiplier *= 1.5;
-
-			}
-
-			float randomFactor = ((rand() % (100 - 85 + 1)) + 85) / 100.0f;
-			float STABMultiplier = 1.0f;
-			if (move.type == pokemon->pokemonStats.type[0] || move.type == pokemon->pokemonStats.type[1]) {
-				STABMultiplier = 1.5f;
-			}
-
-			float burnMultiplier = 1.0f;
-			if (pokemon->pokemonStats.statusEffect == BURNED) {
-				burnMultiplier = 0.5f;
-			}
-
-			int pokeLevel = pokemon->pokemonStats.level;
-			
-			float attackStatMultiplier = 1.0f;
-			float defenseStatMultiplier = 1.0f;
-
-			if (pokemon->pokemonStats.statStages[move.moveType] >= 0) {
-				attackStatMultiplier = (2.0f + pokemon->pokemonStats.statStages[move.moveType]) / 2.0f;
-			}
-			else if (!crit) {
-				attackStatMultiplier = 2.0f / (2.0f - pokemon->pokemonStats.statStages[move.moveType]);
-			}
-
-			if (opponent->pokemonStats.statStages[move.moveType + 1] >= 0 && !crit) {
-				defenseStatMultiplier = (2.0f + opponent->pokemonStats.statStages[move.moveType + 1]) / 2.0f;
+	if (pokemon != NULL) {
+		pokemonMove move = pokemon->pokemonStats.moveSet[moveNumber];
+		char* output[360];
+		snprintf(output, sizeof(output), "");
+		if (pokemon->pokemonStats.statusEffect == ASLEEP) {
+			if (rollNumber() >= 1.0f / 3.0f) {
+				snprintf(output, sizeof(output), "%s woke up!\n", pokemon->pokemonStats.nickname);
+				pokemon->pokemonStats.statusEffect = NONE;
 			}
 			else {
-				defenseStatMultiplier = 2.0f / (2.0f - opponent->pokemonStats.statStages[move.moveType + 1]);
+				gi.centerprintf("%s is fast asleep.", pokemon->pokemonStats.nickname);
+				return;
+			}
+		}
+
+		if (pokemon->pokemonStats.statusEffect == PARALYZED) {
+			if (rollNumber() >= .25f) {
+				gi.centerprintf("%s is paralyzed! It can't move!", pokemon->pokemonStats.nickname);
+				return;
+
+			}
+		}
+
+		if (pokemon->pokemonStats.statusEffect == FROZEN) {
+			if (rollNumber() >= .20) {
+				snprintf(output, sizeof(output), "%s thawed out!\n", pokemon->pokemonStats.nickname);
+				pokemon->pokemonStats.statusEffect = NONE;
+			} else {
+				gi.centerprintf("%s is frozen solid.", pokemon->pokemonStats.nickname);
+				return;
+			}
+		}
+
+		char* usedMove[360];
+		snprintf(usedMove, sizeof(usedMove), "%s used %s!\n", pokemon->pokemonStats.nickname, move.name);
+		strcat(output, usedMove);
+		float modifiedAccuracy;
+		if (move.accuracy != -1) {
+			float adjustedStages = 1.0f;
+			int accuracyStages = pokemon->pokemonStats.statStages[6] - opponent->pokemonStats.statStages[7];
+			if (accuracyStages >= 0) {
+				adjustedStages = (3.0f + accuracyStages) / 3.0f;
+			}
+			else {
+				adjustedStages = 3.0f / (3.0f - accuracyStages);
+			}
+			modifiedAccuracy = move.accuracy * adjustedStages;
+		}
+		else {
+			modifiedAccuracy = 1.0f;
+		}
+
+		if (rollNumber() > modifiedAccuracy) {
+			char* missed[360];
+			snprintf(missed, sizeof(missed), "%s's attack missed!", pokemon->pokemonStats.nickname);
+			strcat(output, missed);
+			gi.centerprintf(trainer, output);
+			return;
+		}
+
+		float typeEffectiveness = 1.0f;
+		int attackerNum = (int)move.type;
+		for (int i = 0; i < 2; i++) {
+			if (opponent->pokemonStats.type[i] != MONOTYPE) {
+				typeEffectiveness *= TypeChart[attackerNum][(int)opponent->pokemonStats.type[i]];
+			}
+		}
+
+		if (typeEffectiveness != 0) {
+
+			if (move.moveType != -1) {
+
+				qboolean crit = false;
+				float critMultiplier = 1.0f;
+				if (rollNumber() <= 1.0f / 24.0f) {
+					crit = true;
+					critMultiplier *= 1.5;
+
+				}
+
+				float randomFactor = ((rand() % (100 - 85 + 1)) + 85) / 100.0f;
+				float STABMultiplier = 1.0f;
+				if (move.type == pokemon->pokemonStats.type[0] || move.type == pokemon->pokemonStats.type[1]) {
+					STABMultiplier = 1.5f;
+				}
+
+				float burnMultiplier = 1.0f;
+				if (pokemon->pokemonStats.statusEffect == BURNED && move.moveType == 1) {
+					burnMultiplier = 0.5f;
+				}
+
+				int pokeLevel = pokemon->pokemonStats.level;
+
+				float attackStatMultiplier = 1.0f;
+				float defenseStatMultiplier = 1.0f;
+
+				if (pokemon->pokemonStats.statStages[move.moveType] >= 0) {
+					attackStatMultiplier = (2.0f + pokemon->pokemonStats.statStages[move.moveType]) / 2.0f;
+				}
+				else if (!crit) {
+					attackStatMultiplier = 2.0f / (2.0f - pokemon->pokemonStats.statStages[move.moveType]);
+				}
+
+				if (opponent->pokemonStats.statStages[move.moveType + 1] >= 0 && !crit) {
+					defenseStatMultiplier = (2.0f + opponent->pokemonStats.statStages[move.moveType + 1]) / 2.0f;
+				}
+				else {
+					defenseStatMultiplier = 2.0f / (2.0f - opponent->pokemonStats.statStages[move.moveType + 1]);
+				}
+
+				float effectiveAttack = attackStatMultiplier * pokemon->pokemonStats.stats[move.moveType];
+				float effectiveDefense = defenseStatMultiplier * opponent->pokemonStats.stats[move.moveType + 1];
+
+				int damage = (((2 * pokeLevel / 5 + 2) * move.power * (effectiveAttack / effectiveDefense)) / 50 + 2) * critMultiplier * randomFactor * STABMultiplier * typeEffectiveness * burnMultiplier;
+				opponent->health -= damage;
+				opponent->pokemonStats.health -= damage;
+
+
+				Com_Printf("Health : %i/%i\n", opponent->health, opponent->max_health);
+				// Com_Printf("%f\n", typeEffectiveness);
+				if (typeEffectiveness > 1.0f) {
+					strcat(output, "It's super effective!\n");
+				}
+				else if (typeEffectiveness < 1.0f) {
+					strcat(output, "It's not very effective...\n");
+				}
+
+				if (crit) {
+					strcat(output, "A critical hit!\n");
+				}
+
 			}
 
-			float effectiveAttack = attackStatMultiplier * pokemon->pokemonStats.stats[move.moveType];
-			float effectiveDefense = defenseStatMultiplier * opponent->pokemonStats.stats[move.moveType + 1];
-			
-			int damage = (((2 * pokeLevel / 5 + 2) * move.power * (effectiveAttack / effectiveDefense)) / 50 + 2) * critMultiplier * randomFactor * STABMultiplier * typeEffectiveness * burnMultiplier;
-			opponent->health -= damage;
-			opponent->pokemonStats.health -= damage;
-			
-
-			Com_Printf("Health : %i/%i\n", opponent->health, opponent->max_health);
-			// Com_Printf("%f\n", typeEffectiveness);
-			if (typeEffectiveness > 1.0f) {
-				strcat(output, "It's super effective!\n");
-			}
-			else if (typeEffectiveness < 1.0f) {
-				strcat(output, "It's not very effective...\n");
-			}
-
-			if (crit) {
-				strcat(output, "A critical hit!\n");
-			}
 			if (rollNumber() <= move.statusEffectChance && opponent->pokemonStats.statusEffect == NONE) {
 				opponent->pokemonStats.statusEffect = move.statusEffect;
 				char* statusChange[360];
+				snprintf(statusChange, sizeof(statusChange), "");
 				switch (opponent->pokemonStats.statusEffect) {
 				case ASLEEP: snprintf(statusChange, sizeof(statusChange), "%s fell asleep!\n", opponent->pokemonStats.nickname); break;
 				case BURNED: snprintf(statusChange, sizeof(statusChange), "%s was burned!\n", opponent->pokemonStats.nickname); break;
@@ -1090,24 +1127,37 @@ void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumbe
 			}
 
 		}
-	} else {
-		char* noEffect[360];
-		snprintf(noEffect, sizeof(noEffect), "It doesn't affect %s...\n", opponent->pokemonStats.nickname);
-		strcat(output, noEffect);
+		else {
+			char* noEffect[360];
+			snprintf(noEffect, sizeof(noEffect), "It doesn't affect %s...\n", opponent->pokemonStats.nickname);
+			strcat(output, noEffect);
 
+		}
+		if (opponent->pokemonStats.statusEffect == FROZEN && move.moveType == FIRE) {
+			char* thawed[360];
+			snprintf(thawed, sizeof(thawed), "%s thawed out!\n", opponent->pokemonStats.nickname);
+			strcat(output, thawed);
+		}
+		if (rollNumber() <= move.stateChangeChance) {
+			strcat(output, statStageChanges(&pokemon->pokemonStats, move.selfStateChange));
+			strcat(output, statStageChanges(&opponent->pokemonStats, move.enemyStateChange));
+		}
+
+		char statusMsg[360];
+		snprintf(statusMsg, sizeof(statusMsg), "");
+		if (pokemon->pokemonStats.statusEffect == BURNED) {
+			pokemon->pokemonStats.health -= (1.0f / 16.0f) * pokemon->pokemonStats.stats[0];
+			snprintf(statusMsg, sizeof(statusMsg), "%s was hurt by its burn\n", pokemon->pokemonStats.nickname);
+		}
+		if (pokemon->pokemonStats.statusEffect == POISONED) {
+			pokemon->pokemonStats.health -= (1.0f / 8.0f) * pokemon->pokemonStats.stats[0];
+			snprintf(statusMsg, sizeof(statusMsg), "%s was hurt by its poison\n", pokemon->pokemonStats.nickname);
+		}
+		strcat(output, statusMsg);
+		pokemon->alreadyMoved = true;
+		gi.centerprintf(trainer, output);
 	}
-	if (opponent->pokemonStats.statusEffect == FROZEN && move.moveType == FIRE) {
-		char* thawed[360];
-		snprintf(thawed, sizeof(thawed), "%s thawed out!\n", opponent->pokemonStats.nickname);
-		strcat(output, thawed);
-	}
-	if (rollNumber() <= move.stateChangeChance) {
-		strcat(output, statStageChanges(pokemon, move.selfStateChange));
-		strcat(output, statStageChanges(opponent, move.enemyStateChange));
-	}
-	pokemon->alreadyMoved = true;
-	gi.centerprintf(trainer, output);
-	
+
 }
 
 
@@ -1115,17 +1165,236 @@ qboolean RunAttempt(edict_t* trainer) {
 	int pokemonSpeed = trainer->client->pers.pokemon->pokemonStats.stats[5];
 	int opponentSpeed = trainer->client->pers.opponent->pokemonStats.stats[5];
 	trainer->client->pers.runAttempts++;
-	float runChance = ( floorf((pokemonSpeed*32)/(opponentSpeed/4))+30*trainer->client->pers.runAttempts ) / 256;
+	float runChance = (floorf((pokemonSpeed * 32) / (opponentSpeed / 4)) + 30 * trainer->client->pers.runAttempts) / 256;
 	float rngNumber = rollNumber();
 	trainer->client->pers.pokemon->alreadyMoved = true;
 	if (rngNumber <= runChance) {
 		gi.centerprintf(trainer, "You got away safely!");
 		EndBattle(trainer, trainer->client->pers.opponent);
 		return true;
-	} else {
+	}
+	else {
 		gi.centerprintf(trainer, "You couldn't get away!");
 		return false;
 	}
+}
+
+void useItem(edict_t* trainer, pokemonStruct* pokemon, pokemonItem* item) {
+
+	/*
+	char*			name;
+	int				healthAmount;
+	pokemonItemType	itemType;
+	status_effect	statusClear;
+	int				statStages[8];
+	float			revivePercent;
+	float			catchRate;
+	int				amount;
+
+	HEALING_ITEM,
+	STATUS_CLEAR_ITEM,
+	BATTLE_ITEM,
+	REVIVES_ITEM,
+	POKEBALLS_ITEM,
+	ESCAPE_ITEM
+	*/
+
+	char* output[360];
+	snprintf(output, sizeof(output), "%s used %s\n", trainer->classname, item->name);
+
+	if (item->amount > 0) {
+		
+		if (item->healthAmount > 0 && pokemon->health > 0) {
+			char healthMsg[360];
+			snprintf(healthMsg, sizeof(healthMsg), "%s had its HP restored.\n", pokemon->nickname);
+			strcat(output, healthMsg);
+			pokemon->health += item->healthAmount;
+			if (pokemon->health > pokemon->stats[0]) {
+				pokemon->health = pokemon->stats[0];
+			}
+			trainer->client->pers.pokemon->health = trainer->client->pers.pokemon->pokemonStats.health;
+		}
+		
+		if (pokemon->statusEffect != NONE) {
+			if (item->statusClear == ALL || pokemon->statusEffect == item->statusClear) {
+				char statusClear[360];
+				snprintf(statusClear, sizeof(statusClear), "%s%s\n", pokemon->nickname, statusToString(pokemon->statusEffect));
+				strcat(output, statusClear);
+				pokemon->statusEffect = NONE;
+			}
+
+		}
+
+		if (item->itemType == ESCAPE_ITEM) {
+			strcat(output, "You got away safely!\n");
+			EndBattle(trainer, trainer->client->pers.opponent);
+		}
+
+
+		if (item->revivePercent > 0.0f && pokemon->health < 0) {
+			char reviveMsg[360];
+			snprintf(reviveMsg, sizeof(reviveMsg), "%s was revived!\n", pokemon->nickname);
+			strcat(output, reviveMsg);
+			pokemon->health *= item->revivePercent;
+		}
+
+		
+
+		if (item->itemType == POKEBALLS_ITEM && item->catchRate >= 1.0f) {
+			char catchMsg[360];
+			float roll = rollNumber();
+
+			if (roll <= catchChance(trainer->client->pers.opponent, item)) {
+				snprintf(catchMsg, sizeof(catchMsg), "Caught a %s!\n", trainer->client->pers.opponent->pokemonStats.nickname);
+				EndBattle(trainer, trainer->client->pers.opponent);
+				CatchAttempt(trainer, trainer->client->pers.opponent);
+			} else {
+				snprintf(catchMsg, sizeof(catchMsg), "%s broke free!\n", trainer->client->pers.opponent->pokemonStats.nickname);
+				
+			}
+			strcat(output, catchMsg);
+		}
+		
+		item->amount--;
+	}
+	trainer->client->pers.pokemon->alreadyMoved = true;
+	gi.centerprintf(trainer, output);
+}
+
+float catchChance(edict_t* pokemon, pokemonItem* item) {
+	float bonusStatus;
+	switch (pokemon->pokemonStats.statusEffect) {
+	case ASLEEP: 
+	case FROZEN: bonusStatus = 2.0f; break;
+	case PARALYZED:
+	case POISONED:
+	case BURNED: bonusStatus = 1.5f; break;
+	default: bonusStatus = 1.0f; break;
+	}
+
+	if (!pokemon->max_health || !pokemon->health) { return 0.0; }
+	float maxhealth = (float)pokemon->max_health;
+	float health = (float)pokemon->health;
+	float ballRate = item->catchRate;
+
+	return ((3.0f * maxhealth - 2.0f * health) / (3.0f * maxhealth)) * ballRate * bonusStatus;
+}
+
+qboolean isEndOfBattle(edict_t* trainer, edict_t* opponent) {
+	char output[360];
+	snprintf(output, sizeof(output), "");
+	char faintMsg[360];
+
+	if (opponent->health <= 0) {
+		snprintf(faintMsg, sizeof(faintMsg), "%s fainted\n", opponent->pokemonStats.nickname);
+		pokemonStruct opponentStruct = opponent->pokemonStats;
+		G_FreeEdict(opponent);
+		strcat(output, faintMsg);
+		rewardPokemon(trainer, &trainer->client->pers.pokemon->pokemonStats, opponentStruct, output);
+		if (trainer->client->pers.learningMove == NULL) { EndBattle(trainer, opponent); }
+		return true;
+	}
+
+	trainer->client->pers.pokemon->health = trainer->client->pers.pokemon->pokemonStats.health;
+	if (trainer->client->pers.pokemon->health <= 0) {
+		snprintf(faintMsg, sizeof(faintMsg), "%s fainted\n", opponent->pokemonStats.nickname);
+		if (!isTeamDead(trainer)) {
+			trainer->client->pers.forcedSwitch = true;
+			trainer->client->pers.menu = POKEMON;
+			trainer->client->pers.selected = -1;
+			trainer->client->pers.selection = 0;
+			trainer->client->pers.battleState = BATTLE_WAIT_ACTION;
+			updateChoices(trainer);
+			UpdateBattleUI(trainer, trainer->client->pers.opponent);
+		}
+		else {
+			EndBattle(trainer, opponent);
+			Killed(trainer, trainer, trainer, 9999, MOD_SUICIDE);
+			strcat(faintMsg, "You blacked out...");
+			strcat(output, faintMsg);
+			gi.centerprintf(trainer, output);
+			return true;
+		}
+		strcat(output, faintMsg);
+	}
+
+	gi.centerprintf(trainer, output);
+	return false;
+}
+qboolean isTeamDead(edict_t* trainer) {
+	for (int i = 0; i < 6; i++) {
+		if (trainer->client->pers.party[i].classname != NULL && trainer->client->pers.party[i].health > 0 && i != trainer->client->pers.pokemonIndex) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void rewardPokemon(edict_t* trainer, pokemonStruct* pokemon, pokemonStruct opponent, char* output) {
+	int expNeededToLvl = (int) ((4.0f / 5.0f) * pow((float)pokemon->level, 3));
+	char* rewardMsg[360];
+
+	float b = 200;
+	float L = (float) opponent.level;
+	float LP = (float) pokemon->level;
+	int experienceGained = (int)((b * L / 5.0f) * pow((2.0f * L + 10.0f) / (L + LP + 10.0f), 2.5f) + 1.0f);
+	pokemon->experience += 3*experienceGained;
+	snprintf(rewardMsg, sizeof(rewardMsg), "%s gained %i experience\n", pokemon->nickname, experienceGained);
+	strcat(output, rewardMsg);
+
+	if (pokemon->experience >= expNeededToLvl) {
+		pokemon->level++;
+		pokemon->experience = 0;
+		snprintf(rewardMsg, sizeof(rewardMsg), "%s grew to LV. %i\n", pokemon->nickname, pokemon->level);
+		strcat(output, rewardMsg);
+
+		for (int i = 0; i < 6; i++) {
+			calculateStat(pokemon, i);
+		}
+
+		char* learnMsg[360];
+		for (int i = 0; i < sizeof(pokemon->learnableMoves) / sizeof(pokemon->learnableMoves[0]); i++) {
+			if (pokemon->learnableMoves[i].levelRequirement == pokemon->level) {
+				for (int j = 0; j < 4; j++) {
+					if (pokemon->moveSet[j].name == NULL) {
+						snprintf(learnMsg, sizeof(learnMsg), "%s learned %s\n", pokemon->nickname, pokemon->learnableMoves[j].name);
+						strcat(output, learnMsg);
+						pokemon->moveSet[j] = pokemon->learnableMoves[j];
+						gi.centerprintf(trainer, output);
+						return;
+					}
+				}
+
+				snprintf(learnMsg, sizeof(learnMsg), "%s wants to learn %s, but it already knows 4 moves\nChoose a move to forget!", pokemon->nickname, pokemon->learnableMoves[i].name);
+				strcat(output, learnMsg);
+				trainer->client->pers.menu = FIGHT;
+				trainer->client->pers.learningMove = &pokemon->learnableMoves[i];
+				trainer->client->pers.selected = -1;
+				trainer->client->pers.selection = 0;
+				trainer->client->pers.battleState = BATTLE_WAIT_ACTION;
+				gi.centerprintf(trainer, output);
+				updateChoices(trainer);
+				UpdateBattleUI(trainer, trainer->client->pers.opponent);
+			}
+		}
+	}
+
+	
+	gi.centerprintf(trainer, output);
+}
+
+char* statusToString(status_effect statusEffect) {
+	char* statusString;
+	switch (statusEffect) {
+	case ASLEEP:	statusString = " woke up!";					break;
+	case BURNED:	statusString = "'s burn was cured!";		break;
+	case FROZEN:	statusString = " thawed out!";				break;
+	case PARALYZED:	statusString = "'s paralysis was cured!";	break;
+	case POISONED:	statusString = "'s poison was cured!";		break;
+	default:		statusString = "";							break;
+	}
+
+	return statusString;
 }
 
 float rollNumber() {

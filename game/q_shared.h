@@ -1009,9 +1009,9 @@ typedef enum
 //GRICKUS!!! 
 #define STAT_INBATTLE			18
 
-/* dont need
-#define STAT_BATTLE_BOXES		19
-*/
+
+#define STAT_HELPMENU		19
+
 #define STAT_BATTLE_BOTTOMBOXES	20
 
 

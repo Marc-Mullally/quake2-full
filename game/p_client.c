@@ -628,6 +628,103 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.catchMode = true;
 	client->pers.connected = true;
 
+	/*
+	
+	char*			name;
+	int				healthAmount;
+	pokemonItemType	itemType;
+	status_effect	statusClear;
+	int				statStages[8];
+	float			revivePercent;
+	float			catchRate;
+	int				amount;
+
+	"POTION"; "HYPER"; "MAX"; "SUPER"; "FULL"; "";
+	"ANTIDOTE"; "BURN HEAL";"ICE HEAL"; "AWAKENING"; "PARALYZE HEAL"; "FULL HEAL";
+	"X ATTACK"; "X DEF"; "X SP.ATK"; "X SP.DEF";  "X SPEED"; "X ACC";
+	"REVIVES"; "MAX REV."; ""; ""; ""; "";
+
+	pokemonItem pokeBag[64];
+	pokemonItem* healingItems[6];
+	pokemonItem* statusClearItems[6];
+	pokemonItem* battleItems[6];
+	pokemonItem* reviveItems[6];
+	pokemonItem* pokeballs[6];
+	pokemonItem* escapeItems[6];
+
+	HEALING_ITEM,
+	STATUS_CLEAR_ITEM,
+	BATTLE_ITEM,
+	REVIVES_ITEM,
+	POKEBALLS_ITEM,
+	ESCAPE_ITEM
+
+	*/
+
+	pokemonItem itembag[] = {{.name = "POTION", .healthAmount = 20, .itemType = HEALING_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f, .amount = 5},
+							 {.name = "SUPER", .healthAmount = 50, .itemType = HEALING_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "HYPER", .healthAmount = 200, .itemType = HEALING_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "MAX", .healthAmount = 999, .itemType = HEALING_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "FULL", .healthAmount = 999, .itemType = HEALING_ITEM, .statusClear = ALL, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+								
+							 {.name = "ANTIDOTE", .healthAmount = 0, .itemType = STATUS_CLEAR_ITEM, .statusClear = POISONED, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "BURN HEAL", .healthAmount = 0, .itemType = STATUS_CLEAR_ITEM, .statusClear = BURNED, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "ICE HEAL", .healthAmount = 0, .itemType = STATUS_CLEAR_ITEM, .statusClear = FROZEN, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "AWAKENING", .healthAmount = 0, .itemType = STATUS_CLEAR_ITEM, .statusClear = ASLEEP, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "PARALYZE HEAL", .healthAmount = 0, .itemType = STATUS_CLEAR_ITEM, .statusClear = PARALYZED, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "FULL HEAL", .healthAmount = 0, .itemType = STATUS_CLEAR_ITEM, .statusClear = ALL, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 
+							 {.name = "X ATTACK", .healthAmount = 0, .itemType = BATTLE_ITEM, .statusClear = NONE, .statStages = {0,1,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "X DEF", .healthAmount = 0, .itemType = BATTLE_ITEM, .statusClear = NONE, .statStages = {0,0,1,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "X SP.ATK", .healthAmount = 0, .itemType = BATTLE_ITEM, .statusClear = NONE, .statStages = {0,0,0,1,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "X SP.DEF", .healthAmount = 0, .itemType = BATTLE_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,1,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "X SPEED", .healthAmount = 0, .itemType = BATTLE_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,1,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "X ACC", .healthAmount = 0, .itemType = BATTLE_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,1,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+
+							 {.name = "REVIVES", .healthAmount = 0, .itemType = REVIVES_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.5f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "MAX REV.", .healthAmount = 0, .itemType = REVIVES_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 1.0f, .catchRate = 0.0f,.amount = 5},
+
+							 {.name = "POKE BALL", .healthAmount = 0, .itemType = POKEBALLS_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 1.0f,.amount = 5},
+							 {.name = "GREAT BALL", .healthAmount = 0, .itemType = POKEBALLS_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 1.5f,.amount = 5},
+							 {.name = "ULTRA BALL", .healthAmount = 0, .itemType = POKEBALLS_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 2.0f,.amount = 5},
+							 {.name = "MASTER BALL", .healthAmount = 0, .itemType = POKEBALLS_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 255.0f,.amount = 5},
+
+							 {.name = "POKEDOLL", .healthAmount = 0, .itemType = ESCAPE_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "F. TAIL", .healthAmount = 0, .itemType = ESCAPE_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5},
+							 {.name = "POKETOY", .healthAmount = 0, .itemType = ESCAPE_ITEM, .statusClear = NONE, .statStages = {0,0,0,0,0,0,0,0}, .revivePercent = 0.0f, .catchRate = 0.0f,.amount = 5} };
+
+	memcpy(client->pers.pokeBag, itembag, sizeof(itembag));
+
+	int healingCount = 0, statusCount = 0, battleCount = 0, reviveCount = 0, pokeballCount = 0, escapeCount = 0;
+	for (int i = 0; i < sizeof(itembag) / sizeof(itembag[0]); i++) {
+		switch (client->pers.pokeBag[i].itemType) {
+		case HEALING_ITEM:
+			client->pers.healingItems[healingCount] = &client->pers.pokeBag[i];
+			healingCount++;
+			break;
+		case STATUS_CLEAR_ITEM:
+			client->pers.statusClearItems[statusCount] = &client->pers.pokeBag[i];
+			statusCount++;
+			break;
+		case BATTLE_ITEM:
+			client->pers.battleItems[battleCount] = &client->pers.pokeBag[i];
+			battleCount++;
+			break;
+		case REVIVES_ITEM:
+			client->pers.reviveItems[reviveCount] = &client->pers.pokeBag[i];
+			reviveCount++;
+			break;
+		case POKEBALLS_ITEM:
+			client->pers.pokeballs[pokeballCount] = &client->pers.pokeBag[i];
+			pokeballCount++;
+			break;
+		case ESCAPE_ITEM:
+			client->pers.escapeItems[escapeCount] = &client->pers.pokeBag[i];
+			escapeCount++;
+			break;
+		}
+	}
+
 	client->pers.inventory[ITEM_INDEX(FindItem("grenades"))] = 5;
 }
 
@@ -1770,17 +1867,36 @@ void BattleThink(edict_t *ent) {
 			ent->client->pers.opponent->moveSelected = rand() % opponentMoveCount;
 		}
 
-		if (!ent->client->pers.pokemon->alreadyMoved && !ent->client->pers.opponent->alreadyMoved) {
+
+		if (ent->client->pers.opponent && !ent->client->pers.pokemon->alreadyMoved && !ent->client->pers.opponent->alreadyMoved) {
 			switch (ent->client->pers.menu) {
 
 			case MAIN:				 if (RunAttempt(ent)) { return; } ent->client->pers.battleDelay = level.time + displayDelay; return;
 
 			case FIGHT: // order only matters on this. rest of them opponent goes last.
 
+
 				if (ent->client->pers.pokemon->pokemonStats.moveSet[ent->client->pers.selected].priority == ent->client->pers.opponent->pokemonStats.moveSet[ent->client->pers.opponent->moveSelected].priority) {
 
-					if (ent->client->pers.pokemon->pokemonStats.stats[5] != ent->client->pers.opponent->pokemonStats.stats[5]) {
-						ent->client->pers.playerFirst = (ent->client->pers.pokemon->pokemonStats.stats[5] > ent->client->pers.opponent->pokemonStats.stats[5]);
+					float pokemonSpeedMultiplier = 1.0f;
+					float opponentSpeedMulitplier = 1.0f;
+
+					if (ent->client->pers.pokemon->pokemonStats.statStages[5] >= 0) {
+						pokemonSpeedMultiplier = (2.0f + (float) ent->client->pers.pokemon->pokemonStats.statStages[5]) / 2.0f;
+					}
+					else {
+						opponentSpeedMulitplier = 2.0f / (2.0f - (float)ent->client->pers.pokemon->pokemonStats.statStages[5]);
+					}
+
+					if (ent->client->pers.opponent->pokemonStats.statStages[5] >= 0) {
+						opponentSpeedMulitplier = (2.0f + (float)ent->client->pers.opponent->pokemonStats.statStages[5]) / 2.0f;
+					}
+					else {
+						opponentSpeedMulitplier = 2.0f / (2.0f - (float)ent->client->pers.opponent->pokemonStats.statStages[5]);
+					}
+
+					if (ent->client->pers.pokemon->pokemonStats.stats[5]*pokemonSpeedMultiplier != ent->client->pers.opponent->pokemonStats.stats[5]*opponentSpeedMulitplier) {
+						ent->client->pers.playerFirst = (ent->client->pers.pokemon->pokemonStats.stats[5] * pokemonSpeedMultiplier > ent->client->pers.opponent->pokemonStats.stats[5] * opponentSpeedMulitplier);
 					}
 					else {
 						ent->client->pers.playerFirst = (rollNumber() >= .5f);
@@ -1802,29 +1918,97 @@ void BattleThink(edict_t *ent) {
 
 				break;
 
-			case POKEMON:				break;
-			case HEALING:				break;
-			case STATUS:				break;
-			case BATTLEITEMS:			break;
-			case REVIVES:				break;
-			case POKEBALLS:				break;
-			case ESCAPE:				break;
+			case POKEMON:
+
+				if (ent->client->pers.itemUsed == NULL) {
+					retrievePokemon(ent);
+					sendOut(ent, ent->client->pers.opponent, ent->client->pers.selected);
+					
+					ent->client->pers.battleDelay = level.time + displayDelay;
+					ent->client->pers.pokemon->alreadyMoved = true;
+					updateChoices(ent);
+					UpdateBattleUI(ent, ent->client->pers.opponent);
+				} else {
+
+					/*
+					"POTION"; "HYPER"; "MAX"; "SUPER"; "FULL"; "";		return;
+					"ANTIDOTE"; "BURN HEAL";"ICE HEAL"; "AWAKENING"; "PARALYZE HEAL"; "FULL HEAL";
+					"X ATTACK"; "X DEF"; "X SP.ATK"; "X SP.DEF";  "X SPEED"; "X ACC";		return;
+					"REVIVES"; "MAX REV."; ""; ""; ""; "";											return;
+
+					*/
+					
+					useItem(ent, &ent->client->pers.pokemon->pokemonStats, ent->client->pers.itemUsed);
+					ent->client->pers.battleDelay = level.time + displayDelay;
+					
+					ent->client->pers.itemUsed = NULL;
+				}
+				return;
+
+			case HEALING:				
+			case STATUS:						
+			case REVIVES:					
+				ent->client->pers.itemUsed = ent->client->pers.currentBag[ent->client->pers.selected];
+				ent->client->pers.menu = POKEMON;
+				ent->client->pers.selected = -1;
+				ent->client->pers.selection = 0;
+				ent->client->pers.battleState = BATTLE_WAIT_ACTION;
+				updateChoices(ent);
+				UpdateBattleUI(ent, ent->client->pers.opponent);
+				return;
+
+			case BATTLEITEMS:
+			case POKEBALLS:
+			case ESCAPE: 
+				
+				useItem(ent, &ent->client->pers.pokemon->pokemonStats, ent->client->pers.currentBag[ent->client->pers.selected]); 
+				ent->client->pers.battleDelay = level.time + displayDelay;
+				if (ent->client->pers.selection != -1) { ent->client->pers.selection = 0; }
+				updateChoices(ent);
+				UpdateBattleUI(ent, ent->client->pers.opponent);
+				return;
 
 			}
 		} 
+		
+		if (ent->client->pers.learningMove != NULL) {
 
+			char learnMsg[360];
+			char forgotMsg[360];
+			snprintf(learnMsg, sizeof(learnMsg), "%s forgot %s\n", ent->client->pers.pokemon->pokemonStats.nickname, ent->client->pers.pokemon->pokemonStats.moveSet[ent->client->pers.selected].name);
+			snprintf(forgotMsg, sizeof(forgotMsg), "%s learned %s!\n", ent->client->pers.pokemon->pokemonStats.nickname, ent->client->pers.learningMove->name);
+			strcat(forgotMsg, learnMsg);
+			Com_Printf("%i", ent->client->pers.selected);
+			Com_Printf("%s", ent->client->pers.pokemon->classname);
+			ent->client->pers.pokemon->pokemonStats.moveSet[ent->client->pers.selected] = *(ent->client->pers.learningMove);
+			ent->client->pers.learningMove = NULL;
+			ent->client->pers.battleState = BATTLE_WAIT_ACTION;
+			ent->client->pers.menu = MAIN;
+			EndBattle(ent, ent->client->pers.opponent);
+
+			gi.centerprintf(ent, forgotMsg);
+			return;
+		}
+		
+		UpdateBattleUI(ent, ent->client->pers.opponent);
+
+		
+
+		if (!isEndOfBattle(ent, ent->client->pers.opponent)) {
 			if (!ent->client->pers.opponent->alreadyMoved) {
-				if (ent->client->pers.menu != FIGHT || !ent->client->pers.playerFirst) {
-					doMove(ent, ent->client->pers.opponent, ent->client->pers.pokemon, ent->client->pers.opponent->moveSelected);
-					ent->client->pers.battleDelay = level.time + displayDelay;
-					return;
-				}
-			} else if (!ent->client->pers.pokemon->alreadyMoved) {
+				//if (ent->client->pers.menu != FIGHT || !ent->client->pers.playerFirst) {
+				doMove(ent, ent->client->pers.opponent, ent->client->pers.pokemon, ent->client->pers.opponent->moveSelected);
+
+				ent->client->pers.battleDelay = level.time + displayDelay;
+				return;
+				//}
+			}
+			else if (!ent->client->pers.pokemon->alreadyMoved) {
 				doMove(ent, ent->client->pers.pokemon, ent->client->pers.opponent, ent->client->pers.selected);
 				ent->client->pers.battleDelay = level.time + displayDelay;
 				return;
 			}
-
+		}
 			if (ent->client->pers.pokemon->alreadyMoved && ent->client->pers.opponent->alreadyMoved) {
 				ent->client->pers.battleState = BATTLE_WAIT_ACTION;
 				ent->client->pers.menu = MAIN;
@@ -1838,7 +2022,7 @@ void BattleThink(edict_t *ent) {
 				return;
 			}
 			
-
+			
 		case (BATTLE_WAIT_ACTION):
 
 			if (ent->client->pers.selected != -1) {
@@ -1855,37 +2039,36 @@ void BattleThink(edict_t *ent) {
 
 				case FIGHT:
 
+
 					if (ent->client->pers.pokemon->pokemonStats.moveSet[ent->client->pers.selected].name != NULL) {
 						ent->client->pers.battleState = BATTLE_PERFORM_ACTION;
 						return;
-					} /* else {
+					} else {
 						ent->client->pers.selected = -1;
 						return;
 					}
-					*/
+					
 					break;
 
 				case BAG:
 					switch (ent->client->pers.selected) {
-						case 0: ent->client->pers.menu = HEALING; break;
-						case 1: ent->client->pers.menu = STATUS; break;
-						case 2: ent->client->pers.menu = BATTLEITEMS; break;
-						case 3: ent->client->pers.menu = REVIVES; break;
-						case 4: ent->client->pers.menu = POKEBALLS; break;
-						case 5: ent->client->pers.menu = ESCAPE; break;
+						case 0: ent->client->pers.menu = HEALING; memcpy(ent->client->pers.currentBag, ent->client->pers.healingItems, sizeof(ent->client->pers.currentBag)); break;
+						case 1: ent->client->pers.menu = STATUS; memcpy(ent->client->pers.currentBag, ent->client->pers.statusClearItems, sizeof(ent->client->pers.currentBag)); break;
+						case 2: ent->client->pers.menu = BATTLEITEMS; memcpy(ent->client->pers.currentBag, ent->client->pers.battleItems, sizeof(ent->client->pers.currentBag)); break;
+						case 3: ent->client->pers.menu = REVIVES; memcpy(ent->client->pers.currentBag, ent->client->pers.reviveItems, sizeof(ent->client->pers.currentBag)); break;
+						case 4: ent->client->pers.menu = POKEBALLS; memcpy(ent->client->pers.currentBag, ent->client->pers.pokeballs, sizeof(ent->client->pers.currentBag)); break;
+						case 5: ent->client->pers.menu = ESCAPE; memcpy(ent->client->pers.currentBag, ent->client->pers.escapeItems, sizeof(ent->client->pers.currentBag)); break;
 					}
 
 					break;
 
 				case POKEMON:
-
-					if (ent->client->pers.party[ent->client->pers.selected].classname != NULL && ent->client->pers.pokemonIndex != ent->client->pers.selected) {
-						if (ent->client->pers.party[ent->client->pers.selected].health > 0) {
-							retrievePokemon(ent);
-							sendOut(ent, ent->client->pers.opponent, ent->client->pers.selected);
-							ent->client->pers.menu = MAIN;
-						}
-						else {
+					
+					if (strcmp(ent->client->pers.choices[ent->client->pers.selected], "") != 0 && (ent->client->pers.pokemonIndex != ent->client->pers.selected || ent->client->pers.itemUsed != NULL)) {
+						if (ent->client->pers.party[ent->client->pers.selected].health > 0 || ent->client->pers.itemUsed == REVIVES_ITEM) {
+							ent->client->pers.battleState = BATTLE_PERFORM_ACTION;
+							return;
+						} else {
 							Com_Printf("$s is unable to battle.", ent->client->pers.party[ent->client->pers.selected].nickname);
 						}
 					} else {
@@ -1893,6 +2076,20 @@ void BattleThink(edict_t *ent) {
 						return;
 					}
 					break;
+
+				case HEALING:
+				case STATUS:
+				case BATTLEITEMS:
+				case REVIVES:
+				case POKEBALLS:
+				case ESCAPE:
+					if (strcmp(ent->client->pers.choices[ent->client->pers.selected], "") != 0) {
+						ent->client->pers.battleState = BATTLE_PERFORM_ACTION;
+					}
+					else {
+						ent->client->pers.selected = -1;
+					}
+					return;
 
 				}
 

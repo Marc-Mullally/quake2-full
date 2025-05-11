@@ -654,11 +654,18 @@ char *single_statusbar =
 "xv	50 "
 "pic 0 "
 
+
 // GRICKUS!!!  UI
+"if 19"
+"	xl 150 yt 150"
+"	picn helpScreen "
+"endif "
+
+
 "if 18 "
 
 "	xl 25 yt 25"
-"	picn pokemonbox"
+"	picn pokemonbox "
 "	xl 35 yt 35"
 "	stat_string 30 "
 "	yt 55"
@@ -788,6 +795,7 @@ char *single_statusbar =
 "endif "
 
 // armor
+/*
 "if 4 "
 "	xv	200 "
 "	rnum "
@@ -796,12 +804,11 @@ char *single_statusbar =
 "endif "
 
 // selected item
-
 "if 6 "
 "	xv	296 "
 "	pic 6 "
 "endif "
-
+*/
 "yb	-50 "
 ;
 
