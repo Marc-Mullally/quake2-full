@@ -2084,7 +2084,12 @@ void BattleThink(edict_t *ent) {
 				case POKEBALLS:
 				case ESCAPE:
 					if (strcmp(ent->client->pers.choices[ent->client->pers.selected], "") != 0) {
-						ent->client->pers.battleState = BATTLE_PERFORM_ACTION;
+						if (ent->client->pers.currentBag[ent->client->pers.selected]->amount > 0) {
+							ent->client->pers.battleState = BATTLE_PERFORM_ACTION;
+						} else {
+							Com_Printf("Out of %ss", ent->client->pers.currentBag[ent->client->pers.selected]->name);
+							ent->client->pers.selected = -1;
+						}
 					}
 					else {
 						ent->client->pers.selected = -1;

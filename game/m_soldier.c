@@ -1242,23 +1242,29 @@ void SP_monster_soldier_x (edict_t *self)
 	self->pokemonStats.type[0] = FIRE;
 	self->pokemonStats.type[1] = MONOTYPE;
 
-	self->pokemonStats.baseStats[0] = 45;
-	self->pokemonStats.baseStats[1] = 75;
-	self->pokemonStats.baseStats[2] = 60;
-	self->pokemonStats.baseStats[3] = 70;
-	self->pokemonStats.baseStats[4] = 60;
-	self->pokemonStats.baseStats[5] = 90;
+	// 300 stat total
+	self->pokemonStats.baseStats[0] = 40;
+	self->pokemonStats.baseStats[1] = 55;
+	self->pokemonStats.baseStats[2] = 50;
+	self->pokemonStats.baseStats[3] = 35;
+	self->pokemonStats.baseStats[4] = 50;
+	self->pokemonStats.baseStats[5] = 70;
 		
-	pokemonMove learnableMoves[] = {{.name = "Tackle",		.moveType = 1,   .power = 40, .priority = 0, .accuracy = 1.0f, .type = NORMAL,  .levelRequirement = 1, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+	pokemonMove learnableMoves[] = {{.name = "Quick Attack",.moveType = 1,   .power = 40, .priority = 1, .accuracy = 1.0f, .type = NORMAL,  .levelRequirement = 1, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
 									{.name = "Growl",		.moveType =-1,   .power = 0,  .priority = 0, .accuracy = 1.0f, .type = NORMAL,  .levelRequirement = 3, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,-1,0,0,0,0,0,0},.statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
 									{.name = "Agility",		.moveType =-1,   .power = 0,  .priority = 0, .accuracy =-1.0f, .type = PSYCHIC, .levelRequirement = 5, .selfStateChange = {0,0,0,0,0,2,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
 									{.name = "Ember",		.moveType = 3,   .power = 40, .priority = 0, .accuracy = 1.0f, .type = FIRE,    .levelRequirement = 7, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance =  .1f, .statusEffect = BURNED,.stateChangeChance = 0.0f},
 									{.name = "Will-o-Wisp", .moveType = -1,  .power = 0,  .priority = 0, .accuracy = .85f, .type = FIRE,    .levelRequirement = 9,.selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 1.0f, .statusEffect = BURNED,.stateChangeChance = 0.0f} };
 
-	
+	int EVYield[] = {0,0,0,0,0,1};
+
+	self->pokemonStats.evolveLevel = 16;
+	self->pokemonStats.evolveTo = "monster_berserk";
+
 	// change end
 
 	memcpy(self->pokemonStats.learnableMoves, learnableMoves, sizeof(learnableMoves));
+	memcpy(self->pokemonStats.EVYield, EVYield, sizeof(EVYield));
 
 	self->pokemonStats.nature[0] = 1 + (rand() % 5);
 	self->pokemonStats.nature[1] = 1 + (rand() % 5);

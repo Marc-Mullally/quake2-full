@@ -900,6 +900,9 @@ typedef struct
 	pokemonMove		moveSet[4];
 	pokemonType		type[2];
 
+	int				evolveLevel;
+	char*			evolveTo;
+
 	/*
 	Order: 
 	0: Health
@@ -917,6 +920,7 @@ typedef struct
 	int				nature[2]; // First value is +, second value is -
 	int				statStages[8];
 	
+	int				EVYield[6];
 	// moves
 	// ADD MORE LATER. copy these stats to edict_t. structure serves to store data of the "pokemon"
 } pokemonStruct;
@@ -978,6 +982,7 @@ qboolean isTeamDead(edict_t* trainer);
 qboolean isEndOfBattle(edict_t* trainer, edict_t* opponent);
 float catchChance(edict_t* pokemon, pokemonItem* item);
 void rewardPokemon(edict_t* trainer, pokemonStruct* pokemon, pokemonStruct opponent, char* output);
+void evolvePokemon(edict_t* trainer, pokemonStruct* pokemon, char* output);
 
 // client data that stays across multiple level loads
 typedef struct
@@ -1015,6 +1020,7 @@ typedef struct
 	pokemonItem*	itemUsed;
 	qboolean		forcedSwitch;
 	pokemonMove*	learningMove;
+	float			expMultiplier;
 
 
 	pokemonItem pokeBag[64];

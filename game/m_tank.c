@@ -849,6 +849,92 @@ void SP_monster_tank (edict_t *self)
 	self->monsterinfo.currentmove = &tank_move_stand;
 	self->monsterinfo.scale = MODEL_SCALE;
 
+	// pokemon stats
+	self->pokemonStats.classname = self->classname;
+	self->pokemonStats.experience = 0;
+	self->pokemonStats.statusEffect = NONE;
+	self->pokemonStats.nickname = malloc(strlen(self->classname + 8) + 1);
+	strcpy(self->pokemonStats.nickname, self->classname + 8);
+
+	// change
+
+	self->pokemonStats.level = 36 + (rand() % 6);
+	self->pokemonStats.type[0] = STEEL;
+	self->pokemonStats.type[1] = ELECTRIC;
+
+	// 500 stat total
+	self->pokemonStats.baseStats[0] = 85;
+	self->pokemonStats.baseStats[1] = 25;
+	self->pokemonStats.baseStats[2] = 115;
+	self->pokemonStats.baseStats[3] = 115;
+	self->pokemonStats.baseStats[4] = 115;
+	self->pokemonStats.baseStats[5] = 45;
+
+	pokemonMove learnableMoves[] = { {.name = "Tackle",		 .moveType = 1,   .power = 40, .priority = 0, .accuracy = 1.0f, .type = NORMAL,    .levelRequirement = 1, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+									{.name = "Scary Face",   .moveType = -1,  .power = 0,  .priority = 0, .accuracy = 1.0f, .type = NORMAL,    .levelRequirement = 3, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,-2}, .statusEffectChance = 0.0f, .statusEffect = NONE,.stateChangeChance = 1.0f},
+									{.name = "Mirror Shot",	 .moveType = 3,   .power = 65, .priority = 0, .accuracy = .85f, .type = STEEL,		.levelRequirement = 5, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,-1,0},.statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.3f},
+									{.name = "Metal Sound",	 .moveType = -1,  .power = 0,  .priority = 0, .accuracy = .85f,  .type = STEEL,    .levelRequirement = 7, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,-2,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Flash Cannon", .moveType = 3,   .power = 80, .priority = 0, .accuracy = 1.0f,  .type = STEEL,    .levelRequirement = 9, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,-1,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE, .stateChangeChance = 0.1f},
+
+									{.name = "Iron Defense", .moveType = -1,   .power = 0, .priority = 0, .accuracy = -1.0f, .type = STEEL,    .levelRequirement = 17, .selfStateChange = {0,2,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Thunder Shock",.moveType = 3,   .power = 40, .priority = 0, .accuracy = 1.0f, .type = ELECTRIC,  .levelRequirement = 19, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0},.statusEffectChance = 0.1f, .statusEffect = PARALYZED,  .stateChangeChance = 0.0f},
+									{.name = "Shift Gear",	 .moveType = -1,  .power = 0,  .priority = 0, .accuracy = -1.0f,  .type = STEEL,    .levelRequirement = 21, .selfStateChange = {0,1,0,0,0,2,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Shock Wave",   .moveType = 3,   .power = 60, .priority = 0, .accuracy = -1.0f, .type = ELECTRIC,  .levelRequirement = 23, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,.stateChangeChance = 0.0f},
+									{.name = "Thunder",		 .moveType = 3,   .power = 110,.priority = 0, .accuracy = 0.7f,  .type = ELECTRIC,    .levelRequirement = 25, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.1f, .statusEffect = PARALYZED, .stateChangeChance = 0.0f}, 
+						
+									{.name = "Thunder Wave", .moveType = -1,   .power = 0, .priority = 0, .accuracy = 0.9f, .type = ELECTRIC,    .levelRequirement = 37, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 1.0f, .statusEffect = PARALYZED,  .stateChangeChance = 0.0f},
+									{.name = "Thunderbolt",	 .moveType = 3,   .power = 90, .priority = 0, .accuracy = 1.0f,   .type = ELECTRIC,  .levelRequirement = 39, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0},.statusEffectChance = 0.1f, .statusEffect = PARALYZED,  .stateChangeChance = 0.0f},
+									{.name = "Charge Beam",	 .moveType = 3,  .power = 50,  .priority = 0, .accuracy = 0.9f, .type = ELECTRIC,    .levelRequirement = 41, .selfStateChange = {0,0,0,1,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.7f},
+									{.name = "Autotomize",   .moveType = -1,   .power = 0, .priority = 0, .accuracy = -1.0f, .type = STEEL,		.levelRequirement = 43, .selfStateChange = {0,0,0,0,0,2,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,		.stateChangeChance = 1.0f},
+									{.name = "Zap Cannon",   .moveType = 3,   .power = 120, .priority = 0, .accuracy = 0.5f, .type = ELECTRIC,  .levelRequirement = 45, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 1.0f, .statusEffect = PARALYZED,.stateChangeChance = 0.0f} };
+
+
+	int EVYield[] = { 0,0,3,0,0,0 };
+
+	// change end
+
+	memcpy(self->pokemonStats.learnableMoves, learnableMoves, sizeof(learnableMoves));
+	memcpy(self->pokemonStats.EVYield, EVYield, sizeof(EVYield));
+
+	self->pokemonStats.nature[0] = 1 + (rand() % 5);
+	self->pokemonStats.nature[1] = 1 + (rand() % 5);
+
+	for (int i = 0; i < 6; i++) {
+		self->pokemonStats.EVStats[i] = 0;
+		self->pokemonStats.IVStats[i] = (rand() % 32);
+		calculateStat(&(self->pokemonStats), i);
+	}
+
+	self->pokemonStats.health = self->pokemonStats.stats[0];
+	self->max_health = self->pokemonStats.stats[0];
+	self->health = self->pokemonStats.stats[0];
+
+	int moveCount = 0;
+
+	for (int i = (sizeof(self->pokemonStats.learnableMoves) / sizeof(self->pokemonStats.learnableMoves[0])) - 1; i >= 0; i--) {
+		if (self->pokemonStats.level >= self->pokemonStats.learnableMoves[i].levelRequirement && moveCount < 4 && self->pokemonStats.learnableMoves[i].name != NULL) {
+			self->pokemonStats.moveSet[moveCount] = self->pokemonStats.learnableMoves[i];
+			moveCount++;
+			if (moveCount == 4) break;
+		}
+	}
+
+	int start = 0, end = moveCount - 1;
+
+	// reverse the order of moves cus looks dumb the other way
+	int i = 0;
+	int j = moveCount - 1;
+	while (i < j) {
+		pokemonMove temp = self->pokemonStats.moveSet[i];
+		self->pokemonStats.moveSet[i] = self->pokemonStats.moveSet[j];
+		self->pokemonStats.moveSet[j] = temp;
+		i++;
+		j--;
+
+	}
+
+	// stats end
+
 	walkmonster_start(self);
 
 	if (strcmp(self->classname, "monster_tank_commander") == 0)

@@ -975,6 +975,107 @@ void Cmd_SelectBack(edict_t* ent) {
 	}
 }
 
+void Cmd_Spawn_f(edict_t* ent) {
+	if (gi.argc() < 2) {
+		Com_Printf("No class name provided\n");
+		return;
+	}
+	char* classname = gi.argv(1);
+
+	edict_t* spawned = G_Spawn();
+
+	vec3_t forward, right, up, spawnOrigin;
+
+	AngleVectors(ent->client->v_angle, forward, right, up);
+	VectorMA(ent->s.origin, 100, forward, spawnOrigin);
+	VectorCopy(spawnOrigin, spawned->s.origin);
+	spawned->s.origin[2] += 20;
+	spawned->classname = classname;
+	ED_CallSpawn(spawned);
+}
+
+void Cmd_ExpMultiplier_f(edict_t* ent) {
+	if (gi.argc() < 2) {
+		Com_Printf("No multiplier provided\n");
+		return;
+	}
+	char* argument = gi.argv(1);
+	ent->client->pers.expMultiplier = atof(argument);
+	Com_Printf("Exp Multiplier set to %f", atof(argument));
+	
+}
+
+void Cmd_partyRemove_f(edict_t* ent) {
+	if (gi.argc() < 2) {
+		Com_Printf("No index provided\n");
+		return;
+	}
+
+	int index = atoi(gi.argv(1));
+
+	if (index < 0 || index >= ent->client->pers.partySize) {
+		Com_Printf("Invalid index %i\n", index);
+		return;
+	}
+
+	for (int i = index; i < ent->client->pers.partySize - 1; i++) {
+		ent->client->pers.party[i] = ent->client->pers.party[i + 1];
+	}
+
+
+	memset(&ent->client->pers.party[ent->client->pers.partySize - 1], 0, sizeof(ent->client->pers.party[0]));
+
+	ent->client->pers.partySize--;
+
+	Com_Printf("Removed Pokemon at index %i.\nParty:\n", index, ent->client->pers.partySize);
+
+	for (int i = 0; i < ent->client->pers.partySize; i++) {
+		Com_Printf("%s\n", ent->client->pers.party[i].nickname);
+	}
+
+	if (ent->client->pers.partySize < 1) {
+		ent->client->pers.catchMode = true;
+		Com_Printf("Catch Mode\n");
+	}
+}
+
+void Cmd_givePokemonItem_f(edict_t* ent) {
+	if (gi.argc() < 3) {
+		Com_Printf("Not enough arguments\n");
+		return;
+	}
+
+	char* itemName = gi.argv(1);
+	int	  amount = atoi(gi.argv(2));
+
+	for (int i = 0; i < sizeof(ent->client->pers.pokeBag)/sizeof(ent->client->pers.pokeBag[0]); i++) {
+		if (ent->client->pers.pokeBag[i].name && strcmp(ent->client->pers.pokeBag[i].name, itemName) == 0) {
+			ent->client->pers.pokeBag[i].amount += amount;
+			Com_Printf("Given %i %s \n Total: %i %ss", amount, itemName, ent->client->pers.pokeBag[i].amount, ent->client->pers.pokeBag[i].name);
+			return;
+		}
+	}
+
+	Com_Printf("Can't find %s", itemName);
+}
+
+void Cmd_setLevel_f(edict_t* ent) {
+	if (gi.argc() < 3) {
+		Com_Printf("Not enough arguments\n");
+		return;
+	}
+
+	int index = atoi(gi.argv(1));
+	int	lvl = atoi(gi.argv(2));
+	ent->client->pers.party[index].level = lvl;
+	
+	for (int i = 0; i < 6;i++) {
+		calculateStat(&(ent->client->pers.party[index]), i);
+	}
+	
+	Com_Printf("%s set to Level %i\n", ent->client->pers.party[index].nickname, lvl);
+}
+
 /*
 =================
 ClientCommand
@@ -1078,7 +1179,229 @@ void ClientCommand (edict_t *ent)
 		Cmd_SelectBack(ent);
 	else if (Q_stricmp(cmd, "helpMenu") == 0) {
 		ent->client->ps.stats[STAT_HELPMENU] = !ent->client->ps.stats[STAT_HELPMENU];
-	} 
+		if (ent->client->ps.stats[STAT_HELPMENU]) {
+			gi.configstring(CS_STATUSBAR, "if 19"
+				"	xl 190 yt 110"
+				"	picn helpScreenBox "
+				"	xl 210 yt 125"
+				"	string \" --------How to Play--------\""
+				"	xl 210 yt 135"
+				"	string \"1. Click H for help screen\""
+				"	xl 210 yt 145"
+				"	string \"2. After spawning, equip your \""
+				"	xl 210 yt 155"
+				"	string \"grenades (G)\""
+				"	xl 210 yt 165"
+				"	string \"3. Throw your grenades at\""
+				"	xl 210 yt 175"
+				"	string \"monsters to capture and \""
+				"	xl 210 yt 185"
+				"	string \"battle \""
+
+				"	xl 210 yt 200"
+				"	string \"----------Controls----------\""
+				"	xl 210 yt 210"
+				"	string \"H  -  Toggle help screen\""
+				"	xl 210 yt 220"
+				"	string \"Enter - (Out of battle) Switch \""
+				"	xl 210 yt 230"
+				"	string \"between Catch and Battle Mode\""
+				"	xl 210 yt 240"
+				"	string \"(In Battle) Select option\""
+				"	xl 210 yt 250"
+				"	string \"Arrow Keys - \""
+				"	xl 210 yt 260"
+				"	string \"(In Battle) Switch selection\""
+				"	xl 210 yt 270"
+				"	string \"Backspace - \""
+				"	xl 210 yt 280"
+				"	string \"(In Battle)  Go back in menu\""
+				"endif ");
+		}
+		else {
+			gi.configstring(CS_STATUSBAR, "yb	-24 "
+
+				// health
+				"xv	0 "
+				"hnum "
+				"xv	50 "
+				"pic 0 "
+
+
+				// GRICKUS!!!  UI
+				/*
+				"if 19"
+				"	xl 200 yt 125"
+				"	picn helpScreen "
+				"endif "
+				*/
+
+				"if 18 "
+
+				"	xl 25 yt 25"
+				"	picn pokemonbox "
+				"	xl 35 yt 35"
+				"	stat_string 30 "
+				"	yt 55"
+				"	stat_string 28 "
+				"	yt 35 xl 185"
+				"	stat_string 9"
+
+				"	xl 400 yt 235"
+				"	picn pokemonbox"
+				"	xl 410 yt 245"
+				"	stat_string 29 "
+				"	yt 265"
+				"	stat_string 27 "
+				"	yt 245 xl 560"
+				"	stat_string 31 "
+
+				"	yb	-100 "
+				"	xv	325 "
+				"	picn	blackbox "
+				"	yb	-92 "
+				"	xv	330 "
+				"	stat_string 21 "
+
+				"	yb	-100 "
+				"	xv	400 "
+				"	picn	blackbox "
+				"	yb	-92 "
+				"	xv	405 "
+				"	stat_string 22 "
+
+				"	yb	-75 "
+				"	xv	325 "
+				"	picn	blackbox "
+				"	yb	-67 "
+				"	xv	330 "
+				"	stat_string 23 "
+
+				"	yb	-75 "
+				"	xv	400 "
+				"	picn	blackbox "
+				"	yb	-67 "
+				"	xv	405 "
+				"	stat_string 24 "
+
+				"endif "
+
+				"if 7 "
+				"	yb	-100 "
+				"	xv	325 "
+				"	picn	blackboxselection "
+				"	yb	-92 "
+				"	xv	330 "
+				"	stat_string 21 "
+				"endif "
+
+				"if 8 "
+				"	yb	-100 "
+				"	xv	400 "
+				"	picn	blackboxselection "
+				"	yb	-92 "
+				"	xv	405 "
+				"	stat_string 22 "
+				"endif "
+
+				"if 10 "
+				"	yb	-75 "
+				"	xv	325 "
+				"	picn	blackboxselection "
+				"	yb	-67 "
+				"	xv	330 "
+				"	stat_string 23 "
+				"endif "
+
+				"if 11 "
+				"	yb	-75 "
+				"	xv	400 "
+				"	picn	blackboxselection "
+				"	yb	-67 "
+				"	xv	405 "
+				"	stat_string 24 "
+				"endif "
+
+				"if 20 "
+				"	yb	-50 "
+				"	xv	325 "
+				"	picn	blackbox "
+				"	yb	-42 "
+				"	xv	330 "
+				"	stat_string 25 "
+
+				"	yb	-50 "
+				"	xv	400 "
+				"	picn	blackbox "
+				"	yb	-42 "
+				"	xv	405 "
+				"	stat_string 26 "
+				"endif "
+
+				"if 16 "
+				"	yb	-50 "
+				"	xv	325 "
+				"	picn	blackboxselection "
+				"	yb	-42 "
+				"	xv	330 "
+				"	stat_string 25 "
+				"endif "
+
+				"if 17 "
+				"	yb	-50 "
+				"	xv	400 "
+				"	picn	blackboxselection "
+				"	yb	-42 "
+				"	xv	405 "
+				"	stat_string 26 "
+				"endif "
+
+				"	yb -24"
+
+				// end here
+
+				// ammo
+				"if 2 "
+				"	xv	100 "
+				"	anum "
+				"	xv	150 "
+				"	pic 2 "
+				"endif "
+
+				// armor
+				/*
+				"if 4 "
+				"	xv	200 "
+				"	rnum "
+				"	xv	250 "
+				"	pic 4 "
+				"endif "
+
+				// selected item
+				"if 6 "
+				"	xv	296 "
+				"	pic 6 "
+				"endif "
+				*/
+				"yb	-50 ");
+		}
+		
+	}
+	else if (Q_stricmp(cmd, "spawn") == 0) {
+		Cmd_Spawn_f(ent);
+	}
+	else if (Q_stricmp(cmd, "expmultiplier") == 0) {
+		Cmd_ExpMultiplier_f(ent);
+	}
+	else if (Q_stricmp(cmd, "partyremove") == 0) {
+		Cmd_partyRemove_f(ent);
+	}
+	else if (Q_stricmp(cmd, "givepokemonitem") == 0) {
+		Cmd_givePokemonItem_f(ent);
+	}
+	else if (Q_stricmp(cmd, "setlevel") == 0) {
+		Cmd_setLevel_f(ent);
+	}
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

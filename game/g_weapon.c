@@ -409,14 +409,15 @@ static void Grenade_Explode (edict_t *ent)
 		float	points;
 		vec3_t	v;
 		vec3_t	dir;
-		
-		
-		if (ent->owner->client->pers.catchMode) { // GRICKUS!!!
-			CatchAttempt(ent->owner, ent->enemy); // Attempt to catch
-		} else {
-			StartBattle(ent->owner, ent->enemy); // Start the battle
+
+		if (ent->enemy->pokemonStats.classname) {
+			if (ent->owner->client->pers.catchMode) { // GRICKUS!!!
+				CatchAttempt(ent->owner, ent->enemy); // Attempt to catch
+			}
+			else {
+				StartBattle(ent->owner, ent->enemy); // Start the battle
+			}
 		}
-		
 		VectorAdd (ent->enemy->mins, ent->enemy->maxs, v);
 		VectorMA (ent->enemy->s.origin, 0.5, v, v);
 		VectorSubtract (ent->s.origin, v, v);
@@ -495,7 +496,7 @@ static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurfa
 }
 
 void fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius)
-{
+{	
 	edict_t	*grenade;
 	vec3_t	dir;
 	vec3_t	forward, right, up;

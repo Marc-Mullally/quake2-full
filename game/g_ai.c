@@ -163,7 +163,7 @@ The monster is walking it's beat
 =============
 */
 void ai_walk (edict_t *self, float dist)
-{
+{	
 	if (false) { //GRICKUS!!!
 		M_MoveToGoal(self, dist);
 

@@ -672,5 +672,81 @@ void SP_monster_brain (edict_t *self)
 	self->monsterinfo.currentmove = &brain_move_stand;	
 	self->monsterinfo.scale = MODEL_SCALE;
 
+	// pokemon stats
+	self->pokemonStats.classname = self->classname;
+	self->pokemonStats.experience = 0;
+	self->pokemonStats.statusEffect = NONE;
+	self->pokemonStats.nickname = malloc(strlen(self->classname + 8) + 1);
+	strcpy(self->pokemonStats.nickname, self->classname + 8);
+
+	// change
+
+	self->pokemonStats.level = 5 + (rand() % 5);
+	self->pokemonStats.type[0] = PSYCHIC;
+	self->pokemonStats.type[1] = MONOTYPE;
+
+	// 300 stat total
+	self->pokemonStats.baseStats[0] = 40;
+	self->pokemonStats.baseStats[1] = 25;
+	self->pokemonStats.baseStats[2] = 40;
+	self->pokemonStats.baseStats[3] = 75;
+	self->pokemonStats.baseStats[4] = 70;
+	self->pokemonStats.baseStats[5] = 50;
+
+	pokemonMove learnableMoves[] = { {.name = "Amnesia",	.moveType = -1,   .power = 0, .priority = 0, .accuracy = -1.0f, .type = PSYCHIC,  .levelRequirement = 1, .selfStateChange = {0,0,0,0,2,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Hypnosis",	.moveType = -1,   .power = 0,  .priority = 0, .accuracy = 0.6f, .type = PSYCHIC,  .levelRequirement = 3, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0},.statusEffectChance = 1.0f, .statusEffect = ASLEEP,  .stateChangeChance = 0.0f},
+									{.name = "Psybeam",		.moveType = 3,   .power = 65,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC, .levelRequirement = 5, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+									{.name = "Calm Mind",	.moveType = -1, .power = 40,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC,   .levelRequirement = 7, .selfStateChange = {0,0,0,1,1,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,.stateChangeChance = 1.0f},
+									{.name = "Psychic",		.moveType = 3,   .power = 90,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC, .levelRequirement = 9, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,-1,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.1f}};
+
+	int EVYield[] = { 0,0,0,0,1,0 };
+
+	self->pokemonStats.evolveLevel = 16;
+	self->pokemonStats.evolveTo = "monster_boss3_stand";
+
+	// change end
+
+	memcpy(self->pokemonStats.learnableMoves, learnableMoves, sizeof(learnableMoves));
+	memcpy(self->pokemonStats.EVYield, EVYield, sizeof(EVYield));
+
+	self->pokemonStats.nature[0] = 1 + (rand() % 5);
+	self->pokemonStats.nature[1] = 1 + (rand() % 5);
+
+	for (int i = 0; i < 6; i++) {
+		self->pokemonStats.EVStats[i] = 0;
+		self->pokemonStats.IVStats[i] = (rand() % 32);
+		calculateStat(&(self->pokemonStats), i);
+	}
+
+	self->pokemonStats.health = self->pokemonStats.stats[0];
+	self->max_health = self->pokemonStats.stats[0];
+	self->health = self->pokemonStats.stats[0];
+
+	int moveCount = 0;
+
+	for (int i = (sizeof(self->pokemonStats.learnableMoves) / sizeof(self->pokemonStats.learnableMoves[0])) - 1; i >= 0; i--) {
+		if (self->pokemonStats.level >= self->pokemonStats.learnableMoves[i].levelRequirement && moveCount < 4 && self->pokemonStats.learnableMoves[i].name != NULL) {
+			self->pokemonStats.moveSet[moveCount] = self->pokemonStats.learnableMoves[i];
+			moveCount++;
+			if (moveCount == 4) break;
+		}
+	}
+
+	int start = 0, end = moveCount - 1;
+
+	// reverse the order of moves cus looks dumb the other way
+	int i = 0;
+	int j = moveCount - 1;
+	while (i < j) {
+		pokemonMove temp = self->pokemonStats.moveSet[i];
+		self->pokemonStats.moveSet[i] = self->pokemonStats.moveSet[j];
+		self->pokemonStats.moveSet[j] = temp;
+		i++;
+		j--;
+
+	}
+
+	// stats end
+
 	walkmonster_start (self);
 }

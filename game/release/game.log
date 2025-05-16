@@ -23,138 +23,150 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(875,7): warnin
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(897,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(885,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(893,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(994,2): warning C4013: 'ED_CallSpawn' undefined; assuming extern returning int
   g_combat.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(370,51): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(370,36): warning C4100: 'targ': unreferenced formal parameter
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(737,14): warning C4047: '=': 'char' differs in levels of indirection from 'char [2]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(739,14): warning C4047: '=': 'char' differs in levels of indirection from 'char [2]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(742,13): warning C4047: '=': 'char' differs in levels of indirection from 'char [2]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(774,2): warning C4013: 'ED_CallSpawn' undefined; assuming extern returning int
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(783,18): warning C4133: 'function': incompatible types - from 'char [16]' to 'edict_t *'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(859,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(933,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(945,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(984,12): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(984,12): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(987,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(987,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(991,21): warning C4133: 'function': incompatible types - from 'char [19]' to 'edict_t *'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(998,21): warning C4133: 'function': incompatible types - from 'char [32]' to 'edict_t *'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1006,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1006,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1009,21): warning C4133: 'function': incompatible types - from 'char [20]' to 'edict_t *'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1015,12): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1015,12): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1016,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1016,10): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1016,10): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1016,18): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1016,18): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1035,13): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1035,13): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1036,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1036,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1036,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1036,19): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1036,19): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1037,29): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1037,29): warning C4024: 'gi': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1102,6): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1102,13): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1102,13): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1105,6): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1105,13): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1105,13): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1109,6): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1109,13): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1109,13): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1117,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1117,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1119,27): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1119,27): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1120,27): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1120,27): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1121,27): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1121,27): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1122,30): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1122,30): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1123,29): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1123,29): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1126,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1126,12): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1126,12): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1126,20): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1126,20): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1132,13): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1132,13): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,19): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,19): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1138,13): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1138,13): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1139,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1139,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1139,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1139,19): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1139,19): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1142,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1142,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1142,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1143,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1143,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1143,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1156,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1156,10): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1156,10): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1158,28): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1158,28): warning C4024: 'gi': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1203,11): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1203,11): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1210,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1210,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1210,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1222,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1222,12): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1222,12): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1229,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1229,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1229,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1237,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1237,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1237,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1255,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1255,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1255,11): warning C4024: 'strcat': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1261,27): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1261,27): warning C4024: 'gi': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1292,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1312,44): warning C4047: 'function': 'vec_t *' differs in levels of indirection from 'int'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1312,44): warning C4024: 'Killed': different types for formal and actual parameter 5
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1313,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1314,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1318,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1342,11): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1342,11): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1343,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1343,17): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1343,17): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1348,12): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1348,12): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1349,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1349,18): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1349,18): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1360,16): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1360,16): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1361,7): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1361,22): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1361,22): warning C4024: 'strcat': different types for formal and actual parameter 2
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1368,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1368,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1369,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1369,20): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1369,20): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(742,14): warning C4047: '=': 'char' differs in levels of indirection from 'char [2]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(744,14): warning C4047: '=': 'char' differs in levels of indirection from 'char [2]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(747,13): warning C4047: '=': 'char' differs in levels of indirection from 'char [2]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(781,2): warning C4013: 'ED_CallSpawn' undefined; assuming extern returning int
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(790,18): warning C4133: 'function': incompatible types - from 'char [16]' to 'edict_t *'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(866,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(940,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(952,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(991,12): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(991,12): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(994,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(994,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(999,21): warning C4133: 'function': incompatible types - from 'char [19]' to 'edict_t *'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1007,21): warning C4133: 'function': incompatible types - from 'char [32]' to 'edict_t *'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1015,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1015,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1019,21): warning C4133: 'function': incompatible types - from 'char [20]' to 'edict_t *'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1025,12): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1025,12): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1026,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1026,10): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1026,10): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1026,18): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1026,18): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1045,13): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1045,13): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1046,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1046,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1046,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1046,19): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1046,19): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1048,29): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1048,29): warning C4024: 'gi': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1113,6): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1113,13): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1113,13): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1116,6): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1116,13): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1116,13): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1120,6): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1120,13): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1120,13): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1128,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1128,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1130,27): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1130,27): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1131,27): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1131,27): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1132,27): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1132,27): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,30): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1133,30): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1134,29): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1134,29): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1137,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1137,12): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1137,12): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1137,20): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1137,20): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1143,13): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1143,13): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1144,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1144,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1144,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1144,19): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1144,19): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1149,13): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1149,13): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1150,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1150,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1150,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1150,19): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1150,19): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1153,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1153,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1153,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1154,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1154,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1154,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1167,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1167,10): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1167,10): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1169,28): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1169,28): warning C4024: 'gi': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1214,11): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1214,11): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1221,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1221,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1221,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1233,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1233,12): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1233,12): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1240,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1240,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1240,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1248,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1248,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1248,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1266,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1266,11): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1266,11): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1272,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1272,10): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1272,10): warning C4024: 'strcat': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1275,27): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1275,27): warning C4024: 'gi': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1306,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1326,44): warning C4047: 'function': 'vec_t *' differs in levels of indirection from 'int'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1326,44): warning C4024: 'Killed': different types for formal and actual parameter 5
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1327,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1328,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1332,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1391,11): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1391,11): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1392,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1392,17): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1392,17): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1397,12): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1397,12): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1398,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1398,18): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1398,18): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1401,27): warning C4047: 'function': 'pokemonStruct *' differs in levels of indirection from 'pokemonStruct **'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1401,27): warning C4024: 'evolvePokemon': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1413,16): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1413,16): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1414,7): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1414,22): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1414,22): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1421,14): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1421,14): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1422,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1422,20): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1422,20): warning C4024: 'strcat': different types for formal and actual parameter 2
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1439,54): warning C4028: formal parameter 2 different from declaration
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1456,11): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1456,11): warning C4024: 'snprintf': different types for formal and actual parameter 1
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1457,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1457,17): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char *[360]'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(1457,17): warning C4024: 'strcat': different types for formal and actual parameter 2
   g_func.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_func.c(428,55): warning C4100: 'activator': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_func.c(428,39): warning C4100: 'other': unreferenced formal parameter
@@ -272,13 +284,13 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_save.c(495,6): warnin
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_save.c(635,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_save.c(690,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   g_spawn.c
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(380,5): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(433,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(543,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(381,5): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(434,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(544,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(925,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(932,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(935,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(545,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(927,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(934,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_spawn.c(937,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   g_svcmds.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_svcmds.c(244,10): warning C4459: declaration of 'game' hides global declaration
       C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_local.h(452,22):
@@ -335,7 +347,7 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_turret.c(278,98): war
   g_utils.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_utils.c(396,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   g_weapon.c
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_weapon.c(466,68): warning C4100: 'plane': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_weapon.c(467,68): warning C4100: 'plane': unreferenced formal parameter
   m_actor.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_actor.c(230,65): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_actor.c(230,55): warning C4100: 'kick': unreferenced formal parameter
@@ -354,11 +366,13 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(315,44): wa
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(381,92): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(381,63): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(381,43): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(461,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(522,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_berserk.c(522,6): warning C4189: 'start': local variable is initialized but not referenced
   Generating Code...
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(249,1): warning C4701: potentially uninitialized local variable 'index' used
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(209,1): warning C4701: potentially uninitialized local variable 'power' used
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(694,1): warning C4700: uninitialized local variable 'pokeLevel' used
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(949,1): warning C4172: returning address of local variable or temporary : statusOutput
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_combat.c(956,1): warning C4172: returning address of local variable or temporary : statusOutput
   Compiling...
   m_boss2.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(470,55): warning C4100: 'kick': unreferenced formal parameter
@@ -367,9 +381,15 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(507,90): warn
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(507,75): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(507,61): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(507,41): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(683,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(747,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss2.c(747,6): warning C4189: 'start': local variable is initialized but not referenced
   m_boss3.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss3.c(31,56): warning C4100: 'activator': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss3.c(31,40): warning C4100: 'other': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss3.c(81,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss3.c(142,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss3.c(142,6): warning C4189: 'start': local variable is initialized but not referenced
   m_boss31.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(31,8): warning C4431: missing type specifier - int assumed. Note: C no longer supports default-int
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(416,54): warning C4100: 'kick': unreferenced formal parameter
@@ -379,6 +399,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(589,89): war
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(589,74): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(589,60): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(589,40): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(753,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(818,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss31.c(818,6): warning C4189: 'start': local variable is initialized but not referenced
   m_boss32.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss32.c(555,56): warning C4100: 'kick': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_boss32.c(555,43): warning C4100: 'other': unreferenced formal parameter
@@ -394,6 +417,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(542,42): warn
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(586,90): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(586,61): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(586,41): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(680,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(735,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_brain.c(735,6): warning C4189: 'start': local variable is initialized but not referenced
   m_chick.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_chick.c(266,55): warning C4100: 'kick': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_chick.c(266,42): warning C4100: 'other': unreferenced formal parameter
@@ -411,6 +437,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(327,45): wa
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(332,92): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(332,63): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(332,43): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(407,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(464,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flipper.c(464,6): warning C4189: 'start': local variable is initialized but not referenced
   m_float.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_float.c(41,45): warning C4100: 'other': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_float.c(566,67): warning C4100: 'damage': unreferenced formal parameter
@@ -429,6 +458,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(564,89): warn
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(564,74): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(564,60): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(564,40): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(630,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(685,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_flyer.c(685,6): warning C4189: 'start': local variable is initialized but not referenced
   m_gladiator.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(49,47): warning C4100: 'other': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(240,69): warning C4100: 'damage': unreferenced formal parameter
@@ -437,6 +469,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(240,46): 
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(308,94): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(308,65): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(308,45): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(391,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(455,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gladiator.c(455,6): warning C4189: 'start': local variable is initialized but not referenced
   m_gunner.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(46,44): warning C4100: 'other': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(283,56): warning C4100: 'kick': unreferenced formal parameter
@@ -445,6 +480,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(335,91): war
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(335,62): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(335,42): warning C4100: 'inflictor': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(409,60): warning C4100: 'eta': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(632,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(694,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_gunner.c(694,6): warning C4189: 'start': local variable is initialized but not referenced
   m_hover.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(43,43): warning C4100: 'other': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(487,55): warning C4100: 'kick': unreferenced formal parameter
@@ -452,6 +490,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(487,42): warn
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(541,90): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(541,61): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(541,41): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(624,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(685,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_hover.c(685,6): warning C4189: 'start': local variable is initialized but not referenced
   m_infantry.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(215,68): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(215,58): warning C4100: 'kick': unreferenced formal parameter
@@ -461,6 +502,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(386,93): w
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(386,64): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(386,44): warning C4100: 'inflictor': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(466,62): warning C4100: 'eta': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(611,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(666,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_infantry.c(666,6): warning C4189: 'start': local variable is initialized but not referenced
   m_insane.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_insane.c(477,66): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_insane.c(477,56): warning C4100: 'kick': unreferenced formal parameter
@@ -477,6 +521,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(413,90): warn
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(413,61): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(413,41): warning C4100: 'inflictor': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(494,59): warning C4100: 'eta': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(773,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(834,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_medic.c(834,6): warning C4189: 'start': local variable is initialized but not referenced
   m_move.c
   m_mutant.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(62,44): warning C4100: 'other': unreferenced formal parameter
@@ -488,6 +535,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(496,43): war
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(574,91): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(574,62): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(574,42): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(668,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(732,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_mutant.c(732,6): warning C4189: 'start': local variable is initialized but not referenced
   m_parasite.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(65,46): warning C4100: 'other': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(275,68): warning C4100: 'damage': unreferenced formal parameter
@@ -496,6 +546,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(275,45): w
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(471,93): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(471,64): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(471,44): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(556,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(611,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(611,6): warning C4189: 'start': local variable is initialized but not referenced
   m_soldier.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(409,67): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(409,57): warning C4100: 'kick': unreferenced formal parameter
@@ -504,8 +557,8 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(792,44): wa
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1144,63): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1144,43): warning C4100: 'inflictor': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1237,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1286,17): warning C4189: 'end': local variable is initialized but not referenced
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1286,6): warning C4189: 'start': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1292,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(1292,6): warning C4189: 'start': local variable is initialized but not referenced
   Generating Code...
   Compiling...
   m_supertank.c
@@ -522,6 +575,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(288,41): warni
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(753,89): warning C4100: 'point': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(753,60): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(753,40): warning C4100: 'inflictor': unreferenced formal parameter
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(857,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(922,17): warning C4189: 'end': local variable is initialized but not referenced
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_tank.c(922,6): warning C4189: 'start': local variable is initialized but not referenced
   p_client.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(70,42): warning C4100: 'self': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(179,66): warning C4100: 'damage': unreferenced formal parameter

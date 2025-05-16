@@ -115,6 +115,7 @@ void SP_misc_blackhole (edict_t *self);
 void SP_misc_eastertank (edict_t *self);
 void SP_misc_easterchick (edict_t *self);
 void SP_misc_easterchick2 (edict_t *self);
+
 // GRICKUS!!! ALL MONSTERS
 void SP_monster_berserk (edict_t *self);
 void SP_monster_gladiator (edict_t *self);
@@ -656,11 +657,12 @@ char *single_statusbar =
 
 
 // GRICKUS!!!  UI
+/*
 "if 19"
-"	xl 150 yt 150"
+"	xl 200 yt 125"
 "	picn helpScreen "
 "endif "
-
+*/
 
 "if 18 "
 

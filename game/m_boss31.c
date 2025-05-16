@@ -745,5 +745,91 @@ void SP_monster_jorg (edict_t *self)
 	self->monsterinfo.currentmove = &jorg_move_stand;
 	self->monsterinfo.scale = MODEL_SCALE;
 
+	// pokemon stats
+	self->pokemonStats.classname = self->classname;
+	self->pokemonStats.experience = 0;
+	self->pokemonStats.statusEffect = NONE;
+	self->pokemonStats.nickname = malloc(strlen(self->classname + 8) + 1);
+	strcpy(self->pokemonStats.nickname, self->classname + 8);
+
+	// change
+
+	self->pokemonStats.level = 36 + (rand() % 5);
+	self->pokemonStats.type[0] = PSYCHIC;
+	self->pokemonStats.type[1] = DRAGON;
+
+	// 500 stat total
+	self->pokemonStats.baseStats[0] = 100;
+	self->pokemonStats.baseStats[1] = 35;
+	self->pokemonStats.baseStats[2] = 85;
+	self->pokemonStats.baseStats[3] = 125;
+	self->pokemonStats.baseStats[4] = 105;
+	self->pokemonStats.baseStats[5] = 50;
+
+	pokemonMove learnableMoves[] = { {.name = "Amnesia",	.moveType = -1,   .power = 0, .priority = 0, .accuracy = -1.0f, .type = PSYCHIC,  .levelRequirement = 1, .selfStateChange = {0,0,0,0,2,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Hypnosis",	.moveType = -1,   .power = 0,  .priority = 0, .accuracy = 0.6f, .type = PSYCHIC,  .levelRequirement = 3, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0},.statusEffectChance = 1.0f, .statusEffect = ASLEEP,  .stateChangeChance = 0.0f},
+									{.name = "Psybeam",		.moveType = 3,   .power = 65,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC, .levelRequirement = 5, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+									{.name = "Calm Mind",	.moveType = -1, .power = 40,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC,   .levelRequirement = 7, .selfStateChange = {0,0,0,1,1,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,.stateChangeChance = 1.0f},
+									{.name = "Psychic",		.moveType = 3,   .power = 90,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC, .levelRequirement = 9, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,-1,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.1f},
+
+									{.name = "Kinesis",		.moveType = -1,   .power = 0, .priority = 0, .accuracy = 0.8f, .type = PSYCHIC,  .levelRequirement = 17, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,-1,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Cosmic Power",.moveType = -1,   .power = 0,  .priority = 0, .accuracy = -1.0f, .type = PSYCHIC,  .levelRequirement = 19, .selfStateChange = {0,0,1,0,1,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0},.statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Eerie Spell",	.moveType = 3,   .power = 80,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC, .levelRequirement = 21, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+									{.name = "Psyshield Bash",.moveType = -1, .power = 70,  .priority = 0, .accuracy = 0.9f, .type = PSYCHIC,   .levelRequirement = 23, .selfStateChange = {0,0,1,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,.stateChangeChance = 1.0f},
+									{.name = "Psycho Boost", .moveType = 3,  .power = 140,  .priority = 0, .accuracy = 0.9f, .type = PSYCHIC, .levelRequirement = 25, .selfStateChange = {0,0,0,-2,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+	
+									{.name = "Dragon Dance",.moveType = -1,   .power = 0, .priority = 0, .accuracy = -1.0f, .type = DRAGON,  .levelRequirement = 37, .selfStateChange = {0,1,0,0,0,1,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f},
+									{.name = "Dragon Breath",.moveType = 3,   .power = 60,  .priority = 0, .accuracy = 1.0f, .type = DRAGON,  .levelRequirement = 39, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0},.statusEffectChance = 0.3f, .statusEffect = PARALYZED,  .stateChangeChance = 0.0f},
+									{.name = "Dragon Pulse",.moveType = 3,   .power = 85,  .priority = 0, .accuracy = 1.0f, .type = DRAGON, .levelRequirement = 41, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 0.0f},
+									{.name = "Lumina Crash",.moveType = 3, .power = 80,  .priority = 0, .accuracy = 1.0f, .type = PSYCHIC,   .levelRequirement = 43, .selfStateChange = {0,0,0,0,0,0,0,0},  .enemyStateChange = {0,0,0,0,-2,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,.stateChangeChance = 1.0f},
+									{.name = "Draco Meteor", .moveType = 3,  .power = 130,  .priority = 0, .accuracy = 0.9f, .type = DRAGON, .levelRequirement = 45, .selfStateChange = {0,0,0,-2,0,0,0,0},  .enemyStateChange = {0,0,0,0,0,0,0,0}, .statusEffectChance = 0.0f, .statusEffect = NONE,  .stateChangeChance = 1.0f} };
+
+	int EVYield[] = { 0,0,0,0,3,0 };
+
+
+	// change end
+
+	memcpy(self->pokemonStats.learnableMoves, learnableMoves, sizeof(learnableMoves));
+	memcpy(self->pokemonStats.EVYield, EVYield, sizeof(EVYield));
+
+	self->pokemonStats.nature[0] = 1 + (rand() % 5);
+	self->pokemonStats.nature[1] = 1 + (rand() % 5);
+
+	for (int i = 0; i < 6; i++) {
+		self->pokemonStats.EVStats[i] = 0;
+		self->pokemonStats.IVStats[i] = (rand() % 32);
+		calculateStat(&(self->pokemonStats), i);
+	}
+
+	self->pokemonStats.health = self->pokemonStats.stats[0];
+	self->max_health = self->pokemonStats.stats[0];
+	self->health = self->pokemonStats.stats[0];
+
+	int moveCount = 0;
+
+	for (int i = (sizeof(self->pokemonStats.learnableMoves) / sizeof(self->pokemonStats.learnableMoves[0])) - 1; i >= 0; i--) {
+		if (self->pokemonStats.level >= self->pokemonStats.learnableMoves[i].levelRequirement && moveCount < 4 && self->pokemonStats.learnableMoves[i].name != NULL) {
+			self->pokemonStats.moveSet[moveCount] = self->pokemonStats.learnableMoves[i];
+			moveCount++;
+			if (moveCount == 4) break;
+		}
+	}
+
+	int start = 0, end = moveCount - 1;
+
+	// reverse the order of moves cus looks dumb the other way
+	int i = 0;
+	int j = moveCount - 1;
+	while (i < j) {
+		pokemonMove temp = self->pokemonStats.moveSet[i];
+		self->pokemonStats.moveSet[i] = self->pokemonStats.moveSet[j];
+		self->pokemonStats.moveSet[j] = temp;
+		i++;
+		j--;
+
+	}
+
+	// stats end
+
 	walkmonster_start(self);
 }

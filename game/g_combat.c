@@ -684,19 +684,24 @@ void UpdateBattleUI(edict_t* trainer, edict_t* target) {
 	trainer->client->ps.stats[STAT_BATTLE_CHOICE5_SELECTED] = trainer->client->pers.selection == 4;
 	trainer->client->ps.stats[STAT_BATTLE_CHOICE6_SELECTED] = trainer->client->pers.selection == 5;
 	
+	//vec3_t savedSpot;
+	//VectorCopy(trainer->s.origin, savedSpot);
+
 	gi.configstring(CS_POKEMON_HP, createHPBar(trainer->client->pers.pokemon->health, trainer->client->pers.pokemon->max_health));
 	gi.configstring(CS_OPPONENT_HP, createHPBar(target->health, target->max_health));
 	
 	gi.configstring(CS_POKEMON_NAME, trainer->client->pers.pokemon->pokemonStats.nickname);
 	gi.configstring(CS_OPPONENT_NAME, target->pokemonStats.nickname);
 
-	char* pokeLevel;
-	snprintf(pokeLevel, 8, "LVL %i", trainer->client->pers.pokemon->pokemonStats.level);
+	char pokeLevel[8];
+	snprintf(pokeLevel, sizeof(pokeLevel), "LVL %i", trainer->client->pers.pokemon->pokemonStats.level);
 	gi.configstring(CS_POKEMON_LEVEL, pokeLevel);
 
 	snprintf(pokeLevel, 8, "LVL %i", target->pokemonStats.level);
 	gi.configstring(CS_OPPONENT_LEVEL, pokeLevel);
-	
+
+	//VectorCopy(savedSpot, trainer->s.origin);
+
 	/*
 	STAT_BATTLE_CHOICE1_SELECTED		7
 	STAT_BATTLE_CHOICE2_SELECTED		8
@@ -770,6 +775,8 @@ void sendOut(edict_t* trainer, edict_t* target, int pokemonIndex) {
 	VectorCopy(trainer->client->pers.pokemonPosition, pokemonEntity->s.origin);
 
 	// change rotation so that they are facing each other
+
+	//
 
 	ED_CallSpawn(pokemonEntity);
 	pokemonEntity->pokemonStats = trainer->client->pers.party[trainer->client->pers.pokemonIndex];
@@ -988,6 +995,7 @@ void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumbe
 				pokemon->pokemonStats.statusEffect = NONE;
 			}
 			else {
+				pokemon->alreadyMoved = true;
 				gi.centerprintf("%s is fast asleep.", pokemon->pokemonStats.nickname);
 				return;
 			}
@@ -995,6 +1003,7 @@ void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumbe
 
 		if (pokemon->pokemonStats.statusEffect == PARALYZED) {
 			if (rollNumber() >= .25f) {
+				pokemon->alreadyMoved = true;
 				gi.centerprintf("%s is paralyzed! It can't move!", pokemon->pokemonStats.nickname);
 				return;
 
@@ -1006,6 +1015,7 @@ void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumbe
 				snprintf(output, sizeof(output), "%s thawed out!\n", pokemon->pokemonStats.nickname);
 				pokemon->pokemonStats.statusEffect = NONE;
 			} else {
+				pokemon->alreadyMoved = true;
 				gi.centerprintf("%s is frozen solid.", pokemon->pokemonStats.nickname);
 				return;
 			}
@@ -1034,6 +1044,7 @@ void doMove(edict_t* trainer, edict_t* pokemon, edict_t* opponent, int moveNumbe
 			char* missed[360];
 			snprintf(missed, sizeof(missed), "%s's attack missed!", pokemon->pokemonStats.nickname);
 			strcat(output, missed);
+			pokemon->alreadyMoved = true;
 			gi.centerprintf(trainer, output);
 			return;
 		}
@@ -1256,6 +1267,9 @@ void useItem(edict_t* trainer, pokemonStruct* pokemon, pokemonItem* item) {
 		}
 		
 		item->amount--;
+		char amountMsg[360];
+		snprintf(amountMsg, sizeof(amountMsg), "Amount of %ss left: %i!\n", item->name, item->amount);
+		strcat(output, amountMsg);
 	}
 	trainer->client->pers.pokemon->alreadyMoved = true;
 	gi.centerprintf(trainer, output);
@@ -1331,14 +1345,49 @@ qboolean isTeamDead(edict_t* trainer) {
 }
 
 void rewardPokemon(edict_t* trainer, pokemonStruct* pokemon, pokemonStruct opponent, char* output) {
-	int expNeededToLvl = (int) ((4.0f / 5.0f) * pow((float)pokemon->level, 3));
+	int expNeededToLvl = (int)((4.0f / 5.0f) * pow((float)pokemon->level, 3));
 	char* rewardMsg[360];
 
 	float b = 200;
-	float L = (float) opponent.level;
-	float LP = (float) pokemon->level;
-	int experienceGained = (int)((b * L / 5.0f) * pow((2.0f * L + 10.0f) / (L + LP + 10.0f), 2.5f) + 1.0f);
-	pokemon->experience += 3*experienceGained;
+	float L = (float)opponent.level;
+	float LP = (float)pokemon->level;
+
+	// EV rewards
+	int EVTotal = 0;
+
+	for (int i = 0; i < 6; i++) {
+		EVTotal += pokemon->EVStats[i];
+	}
+
+	for (int i = 0; i < 6; i++) {
+		if (EVTotal >= 510) {
+			break;
+		}
+
+		int EvGained = opponent.EVYield[i];
+
+		if (pokemon->EVStats[i] + EvGained > 252) {
+			EvGained = 252 - pokemon->EVStats[i];
+		}
+
+		if (EVTotal + EvGained > 510) {
+			EvGained = 510 - EVTotal;
+		}
+
+		pokemon->EVStats[i] += EvGained;
+		EVTotal += EvGained;
+	}
+
+	for (int i = 0; i < 6; i++) {
+		calculateStat(pokemon, i);
+	}
+
+	// ev rewards end
+	if (!trainer->client->pers.expMultiplier) {
+		trainer->client->pers.expMultiplier = 1.0f;
+	}
+	int experienceGained = (int)(((b * L / 5.0f) * pow((2.0f * L + 10.0f) / (L + LP + 10.0f), 2.5f) + 1.0f) * trainer->client->pers.expMultiplier);
+	pokemon->experience += experienceGained;
 	snprintf(rewardMsg, sizeof(rewardMsg), "%s gained %i experience\n", pokemon->nickname, experienceGained);
 	strcat(output, rewardMsg);
 
@@ -1347,6 +1396,10 @@ void rewardPokemon(edict_t* trainer, pokemonStruct* pokemon, pokemonStruct oppon
 		pokemon->experience = 0;
 		snprintf(rewardMsg, sizeof(rewardMsg), "%s grew to LV. %i\n", pokemon->nickname, pokemon->level);
 		strcat(output, rewardMsg);
+
+		if (pokemon->level >= pokemon->evolveLevel) {
+			evolvePokemon(trainer, &pokemon, output);
+		}
 
 		for (int i = 0; i < 6; i++) {
 			calculateStat(pokemon, i);
@@ -1381,6 +1434,33 @@ void rewardPokemon(edict_t* trainer, pokemonStruct* pokemon, pokemonStruct oppon
 
 	
 	gi.centerprintf(trainer, output);
+}
+
+void evolvePokemon(edict_t* trainer, pokemonStruct** pokemon, char* output) {
+	edict_t* evolution = G_Spawn();
+
+	evolution->classname = (*pokemon)->evolveTo;
+	VectorCopy(trainer->client->pers.pokemonPosition, evolution->s.origin);
+
+	ED_CallSpawn(evolution);
+	memcpy(evolution->pokemonStats.EVStats, (*pokemon)->EVStats,  sizeof((*pokemon)->EVStats));
+	memcpy(evolution->pokemonStats.IVStats, (*pokemon)->IVStats, sizeof((*pokemon)->IVStats));
+	memcpy(evolution->pokemonStats.moveSet, (*pokemon)->moveSet, sizeof((*pokemon)->moveSet));
+	memcpy(evolution->pokemonStats.nature, (*pokemon)->nature, sizeof((*pokemon)->nature));
+
+	evolution->pokemonStats.health = (*pokemon)->health;
+	evolution->pokemonStats.level = (*pokemon)->level;
+	evolution->pokemonStats.statusEffect = (*pokemon)->statusEffect;
+
+	char* evolveMsg[360];
+	snprintf(evolveMsg, sizeof(evolveMsg), "%s evolved into %s!\n", (*pokemon)->nickname, evolution->classname);
+	strcat(output, evolveMsg);
+
+	G_FreeEdict(trainer->client->pers.pokemon);
+
+	trainer->client->pers.pokemon = evolution;
+	*pokemon = &(trainer->client->pers.pokemon->pokemonStats);
+	
 }
 
 char* statusToString(status_effect statusEffect) {
