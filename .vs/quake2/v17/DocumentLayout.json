@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{99BC3F01-A7EE-4881-939F-8A5EB75E1973}|game\\game.vcxproj|C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\p_client.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{99BC3F01-A7EE-4881-939F-8A5EB75E1973}|game\\game.vcxproj|solutionrelative:game\\p_client.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{99BC3F01-A7EE-4881-939F-8A5EB75E1973}|game\\game.vcxproj|C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\g_combat.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{99BC3F01-A7EE-4881-939F-8A5EB75E1973}|game\\game.vcxproj|solutionrelative:game\\g_combat.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99BC3F01-A7EE-4881-939F-8A5EB75E1973}|game\\game.vcxproj|C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\g_spawn.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{99BC3F01-A7EE-4881-939F-8A5EB75E1973}|game\\game.vcxproj|solutionrelative:game\\g_spawn.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,18 +25,45 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "g_spawn.c",
+              "DocumentMoniker": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\g_spawn.c",
+              "RelativeDocumentMoniker": "game\\g_spawn.c",
+              "ToolTip": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\g_spawn.c",
+              "RelativeToolTip": "game\\g_spawn.c",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHIAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-05-16T18:13:44.948Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "p_client.c",
+              "DocumentMoniker": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\p_client.c",
+              "RelativeDocumentMoniker": "game\\p_client.c",
+              "ToolTip": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\p_client.c",
+              "RelativeToolTip": "game\\p_client.c",
+              "ViewState": "AgIAAHsHAAAAAAAAAAAtwKMHAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-05-16T18:41:01.328Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "g_combat.c",
               "DocumentMoniker": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\g_combat.c",
               "RelativeDocumentMoniker": "game\\g_combat.c",
               "ToolTip": "C:\\Users\\marcm\\OneDrive\\Documents\\GitHub\\quake2-full\\game\\g_combat.c",
               "RelativeToolTip": "game\\g_combat.c",
-              "ViewState": "AgIAAFYEAAAAALGhvIbUvwAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAMsEAAAAAAAAAAAtwKgEAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2025-05-09T21:58:29.764Z",
               "EditorCaption": ""

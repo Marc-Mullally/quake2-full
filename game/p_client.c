@@ -1940,7 +1940,8 @@ void BattleThink(edict_t *ent) {
 					
 					useItem(ent, &ent->client->pers.pokemon->pokemonStats, ent->client->pers.itemUsed);
 					ent->client->pers.battleDelay = level.time + displayDelay;
-					
+					updateChoices(ent);
+					UpdateBattleUI(ent, ent->client->pers.opponent);
 					ent->client->pers.itemUsed = NULL;
 				}
 				return;

@@ -1,10 +1,10 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   g_ai.c
+  g_chase.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_ai.c(110,6): warning C4127: conditional expression is constant
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_ai.c(167,6): warning C4127: conditional expression is constant
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_ai.c(778,47): warning C4100: 'dist': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_ai.c(933,6): warning C4127: conditional expression is constant
-  g_chase.c
   g_cmds.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(34,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\g_cmds.c(57,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -547,9 +547,9 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(471,93): w
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(471,64): warning C4100: 'attacker': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(471,44): warning C4100: 'inflictor': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(556,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  m_soldier.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(611,17): warning C4189: 'end': local variable is initialized but not referenced
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_parasite.c(611,6): warning C4189: 'start': local variable is initialized but not referenced
-  m_soldier.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(409,67): warning C4100: 'damage': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(409,57): warning C4100: 'kick': unreferenced formal parameter
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\m_soldier.c(409,44): warning C4100: 'other': unreferenced formal parameter
@@ -592,8 +592,8 @@ C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1030,40): wa
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1469,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1474,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1514,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1980,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(2068,104): warning C4047: '==': 'pokemonItem *' differs in levels of indirection from 'int'
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1981,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(2069,104): warning C4047: '==': 'pokemonItem *' differs in levels of indirection from 'int'
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_client.c(1851,6): warning C4189: 'modPriority': local variable is initialized but not referenced
   p_hud.c
 C:\Users\marcm\Downloads\New folder (3)\quake2-full\game\p_hud.c(234,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
